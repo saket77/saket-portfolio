@@ -1,0 +1,12 @@
+node_modules/
+frontend/dist/
+backend/data/*.json
+backend/data/*.db
+backend/data/*.db-*
+.env
+.env.local
+.DS_Store
+*.log
+
+# Local Claude Code config (machine-specific, not for the repo)
+.claude/settings.local.json

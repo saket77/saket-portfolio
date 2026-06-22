@@ -1,0 +1,119 @@
+{
+  "name": "Saket Mundhada",
+  "tagline": "Full-stack AI automation engineer — I turn natural-language goals into shipped agent workflows.",
+  "location": "Philadelphia, PA",
+  "email": "saketmundhada7@gmail.com",
+  "phone": "(917) 690-4451",
+  "resumePath": "/Saket_Mundhada_FDE_resume.pdf",
+  "bookingUrl": "",
+  "links": {
+    "linkedin": "https://www.linkedin.com/in/spm1234",
+    "github": "https://github.com/saket77",
+    "webgpt": "https://github.com/saket77/webgpt-frontend",
+    "youtube": "https://youtube.com/shorts/Y_MClhc6Khg"
+  },
+  "summary": "Full-stack AI automation engineer who scopes messy business workflows, builds LLM-powered prototypes, and turns working patterns into reusable agent runtimes. Built WebGPT, an open-source browser/spreadsheet agent system; deployed WebGPT-powered workflows for a real estate operations team; and prototyped DesignGPT, an embeddable enterprise AI-agent framework for Lutron web applications.",
+  "lookingFor": "Forward Deployed Engineer / Applied AI roles — embedding with customers and shipping agents into production.",
+  "projects": [
+    {
+      "slug": "webgpt",
+      "title": "WebGPT — Open-Source AI Workflow Agent Platform",
+      "stack": "TypeScript, React, Chrome MV3, Node.js, Express, OpenAI APIs, OpenAPI, Google Sheets API, Microsoft Graph",
+      "tags": ["browser agents", "tool/action contracts", "Chrome MV3", "OpenAI", "spreadsheets", "OpenAPI", "workflow replay", "full-stack"],
+      "summary": "An open-source platform that turns natural-language goals into executed workflows across the browser, spreadsheets, and documents — published as a Chrome extension with a deployed hosted planner backend.",
+      "bullets": [
+        "Published WebGPT as a Chrome extension for beta users with a deployed hosted planner backend, enabling natural-language workflows across browser, spreadsheet, and document-heavy operations.",
+        "Turns natural-language goals into browser actions, spreadsheet API operations, and replayable workflows across browser_dom, browser_cdp, google_sheets, and microsoft_excel surfaces.",
+        "Designed as reusable infrastructure for customer-specific workflows: site/content adapters for messy web apps, runtime surfaces for API-backed tools, and bring-your-own planner backends through an OpenAPI-style contract.",
+        "Built the Chrome runtime: sidepanel UX, structured multi-frame state extraction, action execution, navigation recovery, human hints, success confirmation, saved artifacts, template queues, and workflow replay.",
+        "Built the hosted planner backend with Express APIs for command runs, command-result loops, run snapshots, lifecycle controls, human feedback, artifacts, replay preflight, state deltas, action-effect summaries, and tests."
+      ]
+    },
+    {
+      "slug": "student-landing",
+      "title": "Student Landing — Real Estate Operations Automation",
+      "stack": "WebGPT, Dotloop, Atlas Philly, Philadelphia government websites, workflow automation",
+      "tags": ["forward-deployed", "customer deployment", "document automation", "operations", "real-world"],
+      "summary": "Real forward-deployed work: embedded with a Philadelphia real-estate firm's operations team and deployed WebGPT-powered routines for document prep and property verification.",
+      "bullets": [
+        "Partnered with Student Landing, a Philadelphia student-services real estate firm, to automate document and property-verification workflows for its operations team.",
+        "Mapped operator workflows for preparing and sending agreements in Dotloop, then deployed WebGPT-powered routines that convert repeatable document steps into guided browser-agent workflows.",
+        "Built property-verification workflows that collect and cross-check lead information from Atlas Philly and Philadelphia government websites, cutting repeated manual lookups.",
+        "Used the live deployment to harden WebGPT's Dotloop adapter, source-value extraction, document-field mapping, replay, and human-review patterns for real operator use."
+      ]
+    },
+    {
+      "slug": "cropgpt",
+      "title": "CropGPT — Intent-to-Edit Media Automation Engine",
+      "stack": "Python, FFmpeg, JSON Schema, CLI tooling, media QA",
+      "tags": ["generative media", "creative AI", "pipelines", "Python", "FFmpeg"],
+      "summary": "A creative workflow engine that translates intent into reusable edit actions — and now into generative interior-design specs.",
+      "bullets": [
+        "Translates creative intent into reusable edit actions: cropping, stacking, captioning, CTA placement, audio normalization, export, and QA.",
+        "Produced the WebGPT YouTube Shorts demos from raw recordings — vertical cuts with branded captions, transcripts, contact sheets, metadata, and review notes.",
+        "Extended into generative interior-design workflows with a collaborator, translating rough room plans and style intent into furnished-room image-generation specs for review and iteration.",
+        "Implemented a recipe-driven pipeline with validation, deterministic FFmpeg rendering, loudness checks, and review reports so new formats define their own editing actions."
+      ]
+    },
+    {
+      "slug": "designgpt",
+      "title": "DesignGPT — Embeddable Enterprise AI-Agent Framework (Lutron)",
+      "stack": "React, embeddable agent runtime, WebGPT engine pattern",
+      "tags": ["enterprise", "embeddable agent", "framework", "applied AI", "prototype"],
+      "summary": "A prototype embeddable AI-agent framework for Lutron web apps — host applications expose domain skills while the agent handles chat, planning, and execution.",
+      "bullets": [
+        "Built a prototype embeddable AI-agent framework for Lutron web applications, repurposing WebGPT's engine pattern.",
+        "Host applications expose their own domain skills while the shared agent handles chat, planning, and execution mechanics.",
+        "Demonstrates the same intent-to-action engine applied inside an enterprise product surface."
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "company": "Lutron",
+      "role": "Project Application Software Engineer",
+      "dates": "Jan 2022 – Present",
+      "bullets": [
+        "Built the DesignGPT prototype embeddable AI-agent framework (above), repurposing WebGPT's engine pattern for Lutron web applications.",
+        "Automated and optimized mission-critical Azure deployment workflows with CI/CD and DevOps processes.",
+        "Resolved 100+ production bugs and multiple P1/P2 outages by prioritizing customer-impacting failures and coordinating fixes across production systems.",
+        "Built React and serverless features (AWS Lambda/S3) for home-automation workflows, including complex scene creation.",
+        "Created a React microfrontend embedded in a WPF application consuming Logik.io headless APIs; delivered MuleSoft middleware integrating WPF with Salesforce CPQ and Logik.io, with a Maven CI/CD pipeline for Anypoint.",
+        "Served as epic owner for exporting line items to Salesforce — translating ambiguous business needs into stories and coordinating cross-team delivery."
+      ]
+    },
+    {
+      "company": "Earlier Software Engineering Roles",
+      "role": "Infinite Solutions · Euronet · Jet Airways",
+      "dates": "2018 – 2021",
+      "bullets": [
+        "Built Java Spring / Angular healthcare web systems, REST and WebSocket APIs, banking microservices, Kubernetes-deployed services, Python prediction workflows, and Android integrations before joining Lutron full-time."
+      ]
+    }
+  ],
+  "skills": {
+    "Languages": "TypeScript, JavaScript, Python, Java, C#, C, C++, SQL, Bash, HTML, CSS",
+    "AI / Agents": "OpenAI APIs, planner/executor loops, browser agents, tool/action contracts, structured extraction, human-in-the-loop review, workflow replay",
+    "Frontend / Runtime": "React, Chrome MV3 Extensions, Vite, content scripts, service workers, Chrome Identity, OAuth, runtime surfaces",
+    "Backend / APIs": "Node.js, Express, OpenAPI, REST APIs, Microsoft Graph, Google Sheets API, run/session orchestration, artifact services",
+    "Cloud / DevOps": "Azure, AWS Lambda, S3, CI/CD, Railway, Kubernetes",
+    "Workflow Automation": "customer discovery, rapid prototyping, operations workflows, document automation, generative media workflows, reusable playbooks"
+  },
+  "education": [
+    {
+      "school": "Harrisburg University of Science and Technology",
+      "degree": "M.S., Computer Information Sciences — Software Engineering / Software Testing concentration",
+      "meta": "GPA: 3.30 / 4.00 · 30 graduate credits completed"
+    },
+    {
+      "school": "Virginia Tech, College of Engineering",
+      "degree": "B.S., Computer Science",
+      "meta": "GPA: 3.01 / 4.00 · Dean's List: Spring 2020 – Spring 2021"
+    },
+    {
+      "school": "Additional Quantitative Coursework",
+      "degree": "Baruch Pre-MFE Advanced Calculus and Probability (Certificate of Distinction); University of Chicago Linear Algebra and Python",
+      "meta": "Projects: mean-reverting portfolio optimization, SOFR futures modeling, trading bots, and options-data analysis."
+    }
+  ]
+}
