@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { X, Send, Sparkles, Loader2 } from "lucide-react";
+import { X, Send, Sparkles, Loader2, Maximize2, Minimize2 } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import content from "./content.json";
 
 const SUGGESTIONS = [
@@ -17,6 +19,7 @@ const GREETING = {
 
 export default function Chat({ onActions }) {
   const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const [messages, setMessages] = useState([GREETING]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -46,6 +49,22 @@ export default function Chat({ onActions }) {
     setMessages(next);
     setInput("");
     setLoading(true);
+
+    // Append streamed text to the in-progress assistant bubble (created on first token).
+    let started = false;
+    const appendToken = (value) => {
+      setMessages((m) => {
+        if (!started) {
+          started = true;
+          return [...m, { role: "assistant", content: value }];
+        }
+        const copy = m.slice();
+        const last = copy[copy.length - 1];
+        copy[copy.length - 1] = { ...last, content: last.content + value };
+        return copy;
+      });
+    };
+
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
@@ -54,10 +73,36 @@ export default function Chat({ onActions }) {
           messages: next.filter((m) => m.role === "user" || m.role === "assistant")
         })
       });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || `Request failed (${res.status}).`);
-      setMessages((m) => [...m, { role: "assistant", content: data.reply || "…" }]);
-      if (Array.isArray(data.actions) && data.actions.length && onActions) onActions(data.actions);
+      // Pre-stream errors (rate limit / not configured / bad request) arrive as JSON.
+      if (!res.ok || !res.body) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || `Request failed (${res.status}).`);
+      }
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+      let streamError = null;
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        let sep;
+        while ((sep = buffer.indexOf("\n\n")) !== -1) {
+          const raw = buffer.slice(0, sep).trim();
+          buffer = buffer.slice(sep + 2);
+          if (!raw.startsWith("data:")) continue;
+          let evt;
+          try { evt = JSON.parse(raw.slice(5).trim()); } catch { continue; }
+          if (evt.type === "token") appendToken(evt.value);
+          else if (evt.type === "action" && onActions) onActions([evt.action]);
+          else if (evt.type === "error") streamError = evt.message;
+        }
+      }
+
+      if (streamError) throw new Error(streamError);
+      if (!started) appendToken("…"); // model produced no text
     } catch (err) {
       setError(err.message);
       setMessages((m) => [
@@ -83,17 +128,26 @@ export default function Chat({ onActions }) {
       </button>
 
       {open && (
-        <div className="chat-panel" role="dialog" aria-label="Ask Saket">
+        <div className={`chat-panel ${expanded ? "expanded" : ""}`} role="dialog" aria-label="Ask Saket">
           <div className="chat-header">
             <div className="chat-title"><Sparkles size={16} /> Ask-Saket</div>
-            <button className="chat-close" onClick={() => setOpen(false)} aria-label="Close chat"><X size={18} /></button>
+            <div className="chat-header-actions">
+              <button className="chat-icon-btn" onClick={() => setExpanded((v) => !v)} aria-label={expanded ? "Shrink chat" : "Expand chat"}>
+                {expanded ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+              </button>
+              <button className="chat-close" onClick={() => setOpen(false)} aria-label="Close chat"><X size={18} /></button>
+            </div>
           </div>
 
           <div className="chat-messages" ref={listRef}>
             {messages.map((m, i) => (
-              <div key={i} className={`msg msg-${m.role}`}>{m.content}</div>
+              <div key={i} className={`msg msg-${m.role}`}>
+                {m.role === "assistant"
+                  ? <div className="md"><ReactMarkdown remarkPlugins={[remarkGfm]}>{m.content}</ReactMarkdown></div>
+                  : m.content}
+              </div>
             ))}
-            {loading && (
+            {loading && messages[messages.length - 1]?.role === "user" && (
               <div className="msg msg-assistant typing"><Loader2 className="spin" size={15} /> thinking…</div>
             )}
           </div>

@@ -1,10 +1,11 @@
-import { useCallback } from "react";
+import { Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
 import {
   Github, Linkedin, Youtube, FileDown, Mail, MapPin, Sparkles,
   ArrowUpRight, GraduationCap, Briefcase, Wrench, MessageSquare
 } from "lucide-react";
 import content from "./content.json";
 import Chat from "./Chat.jsx";
+import { BlogIndex, BlogPost } from "./Blog.jsx";
 
 function scrollToId(id) {
   const el = document.getElementById(id);
@@ -25,14 +26,26 @@ function openAsk() {
 }
 
 function Nav() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  // Section links live on the home page; from another route, go home then scroll.
+  const goToSection = (id) => {
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => scrollToId(id), 60);
+    } else {
+      scrollToId(id);
+    }
+  };
   return (
     <nav className="nav">
-      <button className="nav-brand" onClick={() => scrollToId("hero")}>SM</button>
+      <button className="nav-brand" onClick={() => goToSection("hero")}>SM</button>
       <div className="nav-links">
-        <button onClick={() => scrollToId("projects")}>Projects</button>
-        <button onClick={() => scrollToId("experience")}>Experience</button>
-        <button onClick={() => scrollToId("skills")}>Skills</button>
-        <button onClick={() => scrollToId("contact")}>Contact</button>
+        <button onClick={() => goToSection("projects")}>Projects</button>
+        <button onClick={() => goToSection("experience")}>Experience</button>
+        <button onClick={() => goToSection("skills")}>Skills</button>
+        <Link className="nav-link" to="/blog">Blog</Link>
+        <button onClick={() => goToSection("contact")}>Contact</button>
         <button className="btn btn-sm" onClick={openAsk}><Sparkles size={15} /> Ask Saket</button>
       </div>
     </nav>
@@ -163,39 +176,67 @@ function Footer() {
   return <footer className="footer">© {new Date().getFullYear()} {content.name} · Built with an AI agent that knows my resume.</footer>;
 }
 
+function Home() {
+  return (
+    <main className="container">
+      <Hero />
+      <Projects />
+      <Experience />
+      <Skills />
+      <Education />
+      <Contact />
+    </main>
+  );
+}
+
 export default function App() {
-  const runActions = useCallback((actions = []) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Some bot actions target elements that only exist on the home page;
+  // from another route, navigate home first, then run them.
+  const goHomeThen = (fn) => {
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(fn, 60);
+    } else {
+      fn();
+    }
+  };
+
+  const runActions = (actions = []) => {
     for (const act of actions) {
       if (act.type === "scroll_to") {
-        scrollToId(act.section);
+        goHomeThen(() => scrollToId(act.section));
       } else if (act.type === "show_project") {
-        const id = `project-${act.slug}`;
-        scrollToId(id);
-        const el = document.getElementById(id);
-        if (el) {
-          el.classList.add("flash");
-          setTimeout(() => el.classList.remove("flash"), 1600);
-        }
+        goHomeThen(() => {
+          const id = `project-${act.slug}`;
+          scrollToId(id);
+          const el = document.getElementById(id);
+          if (el) {
+            el.classList.add("flash");
+            setTimeout(() => el.classList.remove("flash"), 1600);
+          }
+        });
       } else if (act.type === "download_resume") {
         downloadResume();
       } else if (act.type === "open_booking") {
         if (content.bookingUrl) window.open(content.bookingUrl, "_blank", "noreferrer");
-        else scrollToId("contact");
+        else goHomeThen(() => scrollToId("contact"));
+      } else if (act.type === "open_blog_post") {
+        navigate(`/blog/${act.slug}`);
       }
     }
-  }, []);
+  };
 
   return (
     <>
       <Nav />
-      <main className="container">
-        <Hero />
-        <Projects />
-        <Experience />
-        <Skills />
-        <Education />
-        <Contact />
-      </main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/blog" element={<main className="container"><BlogIndex /></main>} />
+        <Route path="/blog/:slug" element={<main className="container"><BlogPost /></main>} />
+      </Routes>
       <Footer />
       <Chat onActions={runActions} />
     </>

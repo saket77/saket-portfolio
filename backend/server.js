@@ -48,12 +48,35 @@ app.post("/api/chat", rateLimit, async (req, res) => {
     return;
   }
 
+  // Stream the reply as Server-Sent Events. Each event is one JSON object:
+  //   {type:"token",value} | {type:"action",action} | {type:"done",toolsUsed} | {type:"error",message}
+  res.writeHead(200, {
+    "Content-Type": "text/event-stream",
+    "Cache-Control": "no-cache, no-transform",
+    Connection: "keep-alive",
+    "X-Accel-Buffering": "no" // disable proxy buffering (Railway) so tokens flush live
+  });
+  res.flushHeaders?.();
+
+  const controller = new AbortController();
+  let clientGone = false;
+  // Listen on `res`, not `req`: req's "close" fires as soon as the request body is
+  // consumed (Express does that immediately), which would abort us before we start.
+  res.on("close", () => { clientGone = true; controller.abort(); });
+  const send = (event) => res.write(`data: ${JSON.stringify(event)}\n\n`);
+
   try {
-    const result = await llm.runAssistant(cleaned);
-    res.json({ reply: result.content, actions: result.actions, toolsUsed: result.toolsUsed });
+    for await (const evt of llm.runAssistantStream(cleaned, controller.signal)) {
+      if (clientGone) break;
+      send(evt);
+    }
   } catch (error) {
-    console.error("Assistant error:", error.message);
-    res.status(502).json({ error: `Assistant failed: ${error.message}` });
+    if (!clientGone) {
+      console.error("Assistant error:", error.message);
+      send({ type: "error", message: `Assistant failed: ${error.message}` });
+    }
+  } finally {
+    res.end();
   }
 });
 

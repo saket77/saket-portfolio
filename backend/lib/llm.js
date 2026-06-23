@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const leads = require("./leads");
+const posts = require("./posts");
 
 // "Ask-Saket" — an OpenAI tool-calling agent over Saket's resume. Mirrors the
 // pocbiotech llm.js pattern: raw fetch to keep deps tiny, a multi-step tool
@@ -92,6 +93,18 @@ const TOOLS = [
   {
     type: "function",
     function: {
+      name: "show_blog_post",
+      description: "Open one of Saket's blog posts on the page when it's relevant to recommend his writing. Use a slug from the 'Recent writing' list in the system prompt.",
+      parameters: {
+        type: "object",
+        properties: { slug: { type: "string", description: "The post slug, e.g. 'building-webgpt'." } },
+        required: ["slug"]
+      }
+    }
+  },
+  {
+    type: "function",
+    function: {
       name: "capture_lead",
       description: "Save a recruiter or visitor's details after they share them. Ask for at least an email first; name, company, and the role they're hiring for are a bonus.",
       parameters: {
@@ -141,6 +154,15 @@ const TOOL_IMPL = {
     ctx.actions.push({ type: "open_booking" });
     return { ok: true };
   },
+  show_blog_post: (args, _ctx) => {
+    const slug = String(args.slug || "").trim();
+    const all = posts.list();
+    const ok = all.some((p) => p.slug === slug);
+    if (ok) _ctx.actions.push({ type: "open_blog_post", slug });
+    return ok
+      ? { ok: true, opened: slug }
+      : { ok: false, error: `Unknown post slug. Valid: ${all.map((p) => p.slug).join(", ") || "(none yet)"}` };
+  },
   capture_lead: async (args, ctx) => {
     const email = String(args.email || "").trim();
     if (!email.includes("@")) return { ok: false, error: "Ask the user for a valid email before saving." };
@@ -154,6 +176,11 @@ function buildSystemPrompt(content) {
   const resume = loadText(RESUME_PATH);
   const slugs = (content.projects || []).map((p) => p.slug).join(", ");
   const email = content.email || "saketmundhada7@gmail.com";
+  const writing = posts.list();
+  const writingBlock = writing.length
+    ? ["Recent writing (call show_blog_post with the slug to open one on the page):",
+       ...writing.map((p) => `- ${p.slug}: "${p.title}"${p.summary ? ` — ${p.summary}` : ""}`)].join("\n")
+    : "Saket has no blog posts published yet.";
   return [
     `You are "Ask-Saket", the AI assistant embedded in Saket Mundhada's portfolio website.`,
     `You speak about Saket in the third person to recruiters and hiring managers. Saket is targeting Forward Deployed Engineer / Applied AI roles.`,
@@ -164,6 +191,8 @@ function buildSystemPrompt(content) {
     ``,
     `Project slugs available to show_project: ${slugs}.`,
     ``,
+    writingBlock,
+    ``,
     `How to behave:`,
     `- Answer ONLY from the resume above. Never invent employers, dates, numbers, or facts. If it isn't there, say so.`,
     `- Be assertive and specific about Saket's strengths, but stay interview-defensible — no claims beyond what's written.`,
@@ -171,6 +200,7 @@ function buildSystemPrompt(content) {
     `- When your answer centers on a project, call show_project (and/or scroll_to) so the page follows along.`,
     `- If the user pastes or describes a job/role, call analyze_job_fit first, then write a tailored "why Saket fits" naming the most relevant projects.`,
     `- If the user shows hiring intent or wants to connect, ask for their name, email, company, and the role, then call capture_lead. Offer open_booking to reach out and download_resume for the PDF.`,
+    `- When a question relates to something Saket has written about, mention the post and call show_blog_post to open it. Only reference posts from the "Recent writing" list above.`,
     `- For anything off-topic or not in the resume, say so briefly and point them to ${email}.`
   ].join("\n");
 }
@@ -203,6 +233,70 @@ async function callOpenAI(messages) {
     throw new Error(data.error?.message || `OpenAI request failed (${response.status}).`);
   }
   return data;
+}
+
+// Streaming variant of callOpenAI. An async generator that yields
+// { type:"token", value } for each text delta, then a final
+// { type:"final", content, toolCalls, finishReason } once the response ends.
+// Tool-call deltas arrive piecemeal (by index) and are reassembled here.
+async function* streamOpenAI(messages, signal) {
+  const response = await fetch(OPENAI_URL, {
+    method: "POST",
+    signal,
+    headers: {
+      Authorization: `Bearer ${OPENAI_API_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      model: OPENAI_MODEL,
+      messages,
+      tools: TOOLS,
+      tool_choice: "auto",
+      temperature: 0.3,
+      stream: true
+    })
+  });
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error?.message || `OpenAI request failed (${response.status}).`);
+  }
+
+  const decoder = new TextDecoder();
+  let buffer = "";
+  let content = "";
+  const toolCalls = []; // index -> { id, type, function:{ name, arguments } }
+  let finishReason = null;
+
+  for await (const chunk of response.body) {
+    buffer += decoder.decode(chunk, { stream: true });
+    let nl;
+    while ((nl = buffer.indexOf("\n")) !== -1) {
+      const line = buffer.slice(0, nl).trim();
+      buffer = buffer.slice(nl + 1);
+      if (!line.startsWith("data:")) continue;
+      const payload = line.slice(5).trim();
+      if (payload === "[DONE]") continue;
+      let json;
+      try { json = JSON.parse(payload); } catch { continue; }
+      const choice = json.choices?.[0];
+      if (!choice) continue;
+      const delta = choice.delta || {};
+      if (delta.content) {
+        content += delta.content;
+        yield { type: "token", value: delta.content };
+      }
+      for (const tc of delta.tool_calls || []) {
+        const i = tc.index ?? 0;
+        if (!toolCalls[i]) toolCalls[i] = { id: tc.id, type: "function", function: { name: "", arguments: "" } };
+        if (tc.id) toolCalls[i].id = tc.id;
+        if (tc.function?.name) toolCalls[i].function.name += tc.function.name;
+        if (tc.function?.arguments) toolCalls[i].function.arguments += tc.function.arguments;
+      }
+      if (choice.finish_reason) finishReason = choice.finish_reason;
+    }
+  }
+
+  yield { type: "final", content, toolCalls: toolCalls.filter(Boolean), finishReason };
 }
 
 /**
@@ -250,4 +344,59 @@ async function runAssistant(history) {
   };
 }
 
-module.exports = { runAssistant, isConfigured, OPENAI_MODEL };
+/**
+ * Streaming version of runAssistant. Async generator that yields SSE-ready events:
+ *   { type:"token", value }      — a chunk of the assistant's reply text
+ *   { type:"action", action }    — a client-side action (scroll/show/etc.), fired live
+ *   { type:"done", toolsUsed }   — the turn is complete
+ * Throws on transport/model errors (the caller emits an "error" event).
+ * `signal` aborts the underlying OpenAI fetch if the client disconnects.
+ */
+async function* runAssistantStream(history, signal) {
+  if (!isConfigured()) throw new Error("OPENAI_API_KEY is not configured.");
+  const content = loadContent();
+  const ctx = { content, actions: [] };
+  const toolsUsed = [];
+  const messages = [{ role: "system", content: buildSystemPrompt(content) }, ...history];
+  let emitted = 0; // how many ctx.actions we've already streamed
+
+  for (let step = 0; step < MAX_STEPS; step++) {
+    let final = null;
+    for await (const evt of streamOpenAI(messages, signal)) {
+      if (evt.type === "token") yield { type: "token", value: evt.value };
+      else if (evt.type === "final") final = evt;
+    }
+    if (!final) throw new Error("OpenAI returned no message.");
+
+    const assistantMsg = { role: "assistant", content: final.content || "" };
+    if (final.toolCalls.length) assistantMsg.tool_calls = final.toolCalls;
+    messages.push(assistantMsg);
+
+    if (final.toolCalls.length === 0) {
+      yield { type: "done", toolsUsed };
+      return;
+    }
+
+    for (const call of final.toolCalls) {
+      const name = call.function?.name;
+      let args = {};
+      try { args = JSON.parse(call.function?.arguments || "{}"); } catch { args = {}; }
+      let result;
+      try {
+        const impl = TOOL_IMPL[name];
+        result = impl ? await impl(args, ctx) : { error: `Unknown tool: ${name}` };
+      } catch (err) {
+        result = { error: err.message };
+      }
+      toolsUsed.push(name);
+      messages.push({ role: "tool", tool_call_id: call.id, content: JSON.stringify(result).slice(0, MAX_TOOL_CHARS) });
+    }
+
+    // Fire any client-side actions this step produced, live, before the next stream.
+    while (emitted < ctx.actions.length) yield { type: "action", action: ctx.actions[emitted++] };
+  }
+
+  yield { type: "done", toolsUsed };
+}
+
+module.exports = { runAssistant, runAssistantStream, isConfigured, OPENAI_MODEL };
