@@ -10,110 +10,216 @@
     "linkedin": "https://www.linkedin.com/in/spm1234",
     "github": "https://github.com/saket77",
     "webgpt": "https://github.com/saket77/webgpt-frontend",
-    "youtube": "https://youtube.com/shorts/Y_MClhc6Khg"
+    "youtube": "https://youtu.be/J1yGDs0M-gA"
   },
-  "summary": "Full-stack AI automation engineer who scopes messy business workflows, builds LLM-powered prototypes, and turns working patterns into reusable agent runtimes. Built WebGPT, an open-source browser/spreadsheet agent system; deployed WebGPT-powered workflows for a real estate operations team; and prototyped DesignGPT, an embeddable enterprise AI-agent framework for Lutron web applications.",
+  "summary": "Full-stack AI automation engineer who scopes messy business workflows, builds LLM-powered prototypes, and turns working patterns into reusable agent runtimes. Built WebGPT, an open-source browser/spreadsheet agent system with an MCP-style connector model; deployed WebGPT-powered workflows for a real estate operations team; and prototyped DesignGPT, an embeddable enterprise AI-agent framework for Lutron web applications. Targeting Forward Deployed / Applied AI engineering roles.",
   "lookingFor": "Forward Deployed Engineer / Applied AI roles — embedding with customers and shipping agents into production.",
   "projects": [
     {
       "slug": "webgpt",
+      "category": "AI & Agents",
       "title": "WebGPT — Open-Source AI Workflow Agent Platform",
       "stack": "TypeScript, React, Chrome MV3, Node.js, Express, OpenAI APIs, OpenAPI, Google Sheets API, Microsoft Graph",
-      "tags": ["browser agents", "tool/action contracts", "Chrome MV3", "OpenAI", "spreadsheets", "OpenAPI", "workflow replay", "full-stack"],
-      "summary": "An open-source platform that turns natural-language goals into executed workflows across the browser, spreadsheets, and documents — published as a Chrome extension with a deployed hosted planner backend.",
+      "tags": ["browser agents", "MCP-style connectors", "Chrome MV3", "OpenAI", "spreadsheets", "OpenAPI", "workflow replay", "full-stack"],
+      "summary": "An open-source Chrome runtime for AI browser agents that turns plain-English goals into executed work across the browser, Google Sheets, and Excel — built around a clean runtime/planner boundary and a connector model. Released to beta users and under active development.",
+      "links": { "demo": "https://youtu.be/J1yGDs0M-gA", "repo": "https://github.com/saket77/webgpt-frontend" },
+      "blogSlugs": ["building-webgpt", "webgpt-reusable-templates", "webgpt-excel", "webgpt-google-sheets"],
       "bullets": [
-        "Published WebGPT as a Chrome extension for beta users with a deployed hosted planner backend, enabling natural-language workflows across browser, spreadsheet, and document-heavy operations.",
-        "Turns natural-language goals into browser actions, spreadsheet API operations, and replayable workflows across browser_dom, browser_cdp, google_sheets, and microsoft_excel surfaces.",
-        "Designed as reusable infrastructure for customer-specific workflows: site/content adapters for messy web apps, runtime surfaces for API-backed tools, and bring-your-own planner backends through an OpenAPI-style contract.",
-        "Built the Chrome runtime: sidepanel UX, structured multi-frame state extraction, action execution, navigation recovery, human hints, success confirmation, saved artifacts, template queues, and workflow replay.",
-        "Built the hosted planner backend with Express APIs for command runs, command-result loops, run snapshots, lifecycle controls, human feedback, artifacts, replay preflight, state deltas, action-effect summaries, and tests."
-      ]
-    },
-    {
-      "slug": "student-landing",
-      "title": "Student Landing — Real Estate Operations Automation",
-      "stack": "WebGPT, Dotloop, Atlas Philly, Philadelphia government websites, workflow automation",
-      "tags": ["forward-deployed", "customer deployment", "document automation", "operations", "real-world"],
-      "summary": "Real forward-deployed work: embedded with a Philadelphia real-estate firm's operations team and deployed WebGPT-powered routines for document prep and property verification.",
-      "bullets": [
-        "Partnered with Student Landing, a Philadelphia student-services real estate firm, to automate document and property-verification workflows for its operations team.",
-        "Mapped operator workflows for preparing and sending agreements in Dotloop, then deployed WebGPT-powered routines that convert repeatable document steps into guided browser-agent workflows.",
-        "Built property-verification workflows that collect and cross-check lead information from Atlas Philly and Philadelphia government websites, cutting repeated manual lookups.",
-        "Used the live deployment to harden WebGPT's Dotloop adapter, source-value extraction, document-field mapping, replay, and human-review patterns for real operator use."
-      ]
-    },
-    {
-      "slug": "cropgpt",
-      "title": "CropGPT — Intent-to-Edit Media Automation Engine",
-      "stack": "Python, FFmpeg, JSON Schema, CLI tooling, media QA",
-      "tags": ["generative media", "creative AI", "pipelines", "Python", "FFmpeg"],
-      "summary": "A creative workflow engine that translates intent into reusable edit actions — and now into generative interior-design specs.",
-      "bullets": [
-        "Translates creative intent into reusable edit actions: cropping, stacking, captioning, CTA placement, audio normalization, export, and QA.",
-        "Produced the WebGPT YouTube Shorts demos from raw recordings — vertical cuts with branded captions, transcripts, contact sheets, metadata, and review notes.",
-        "Extended into generative interior-design workflows with a collaborator, translating rough room plans and style intent into furnished-room image-generation specs for review and iteration.",
-        "Implemented a recipe-driven pipeline with validation, deterministic FFmpeg rendering, loudness checks, and review reports so new formats define their own editing actions."
+        "Published a Chrome MV3 extension with a deployed hosted planner backend that turns natural-language goals into executed workflows across the browser, Google Sheets, and Excel.",
+        "Designed a connector model — MCP-server-style — where site adapters and API-backed 'surfaces' (Google Sheets, Microsoft Excel) are different flavors of connectors the agent plugs into.",
+        "Kept a crisp runtime/planner boundary: the extension owns browser execution and state extraction; any backend that speaks the documented OpenAPI contract can own planning.",
+        "Built the Chrome runtime — sidepanel UX, structured multi-frame state extraction, action execution, navigation recovery, human-in-the-loop confirmation, and replay.",
+        "Turned successful runs into reusable routines (templates) that re-run across new inputs instead of starting from zero every time.",
+        "Released to beta users and under active development — roadmap includes a user-facing skill to create a connector for any site (DOM or API), with OAuth and PKCE handled for you."
       ]
     },
     {
       "slug": "designgpt",
+      "category": "AI & Agents",
       "title": "DesignGPT — Embeddable Enterprise AI-Agent Framework (Lutron)",
-      "stack": "React, embeddable agent runtime, WebGPT engine pattern",
-      "tags": ["enterprise", "embeddable agent", "framework", "applied AI", "prototype"],
-      "summary": "A prototype embeddable AI-agent framework for Lutron web apps — host applications expose domain skills while the agent handles chat, planning, and execution.",
+      "stack": "TypeScript, Node, React, embeddable agent runtime, WebGPT engine pattern",
+      "tags": ["enterprise", "embeddable agent", "framework", "applied AI"],
+      "summary": "WebGPT's engine packaged as a Node module so Lutron web applications can expose their own domain skills while the framework handles chat, planning, and execution.",
       "bullets": [
-        "Built a prototype embeddable AI-agent framework for Lutron web applications, repurposing WebGPT's engine pattern.",
-        "Host applications expose their own domain skills while the shared agent handles chat, planning, and execution mechanics.",
-        "Demonstrates the same intent-to-action engine applied inside an enterprise product surface."
+        "Built a prototype embeddable AI-agent framework — WebGPT's engine as a Node module — so host apps can drop in an agent without rebuilding planning or execution.",
+        "Host applications expose their own domain skills; the shared framework handles chat, planning, and the execution loop.",
+        "Reuses WebGPT's tool/action contract and runtime boundary, bringing the same intent-to-action engine inside an enterprise product surface."
+      ]
+    },
+    {
+      "slug": "pocbiotech",
+      "category": "AI & Agents",
+      "title": "POC Biotech — AI Inventory & Ordering Assistant (Client Deployment)",
+      "stack": "Node.js, Express, OpenAI tool-calling, SQLite, Railway, Resend",
+      "tags": ["forward-deployed", "client deployment", "tool-calling agent", "ERP", "applied AI"],
+      "summary": "A production AI assistant deployed for a Mumbai pharmaceutical distributor that answers natural-language questions over their ERP data and helps decide what to reorder.",
+      "bullets": [
+        "Built and deployed an OpenAI tool-calling agent that answers plain-English questions over the client's ERP data — stock on hand, expiry, reorder suggestions, and slow movers.",
+        "Implemented read-only analytics tools plus guarded SELECT-only SQL over normalized purchase/sale transactions, so every number the model reports is grounded in real data.",
+        "Reduced purchasing ~3% by forecasting reorders against sitting inventory and flagging slow-moving and soon-to-expire stock.",
+        "Forward-deployed end to end: scoped the workflow with the owner, parsed their Excel/Marg exports, and shipped a single Railway service with email notifications via Resend."
+      ]
+    },
+    {
+      "slug": "student-landing",
+      "category": "AI & Agents",
+      "title": "Student Landing — Real Estate Operations Automation (Forward-Deployed)",
+      "stack": "WebGPT, Dotloop connector, Atlas Philly, Philadelphia government websites",
+      "tags": ["forward-deployed", "customer deployment", "connectors", "operations", "real-world"],
+      "summary": "Real forward-deployed work: embedded with a Philadelphia real-estate firm's operations team and deployed WebGPT routines for document prep and property verification.",
+      "bullets": [
+        "Embedded with Student Landing's operations team and deployed WebGPT routines that automate Dotloop agreement prep and property verification against city and third-party sites.",
+        "Built WebGPT's Dotloop connector, which drives Dotloop through API calls rather than brittle DOM steps — now being promoted to a first-class 'surface' (like Google Sheets) for speed.",
+        "Hardened field mapping, source-value extraction, replay, and human-review patterns through real operator use under deadline pressure."
+      ]
+    },
+    {
+      "slug": "cropgpt",
+      "category": "AI & Agents",
+      "title": "CropGPT — Intent-to-Edit Media Automation Engine",
+      "stack": "Python, FFmpeg, OpenAI APIs, image-generation models, JSON Schema",
+      "tags": ["generative media", "creative AI", "pipelines", "Python", "FFmpeg"],
+      "summary": "A creative workflow engine that translates intent into reusable edit actions — and into generative interior-design specs.",
+      "bullets": [
+        "Translates creative intent into reusable edit actions: cropping, captioning, CTA placement, audio normalization, export, and QA.",
+        "Produced WebGPT's YouTube Shorts demos from raw recordings — vertical cuts with branded captions, transcripts, and review notes.",
+        "Extended into generative interior-design workflows using OpenAI APIs and image-generation models: rough room plans and style intent become furnished-room image specs.",
+        "Recipe-driven pipeline with validation, deterministic FFmpeg rendering, and loudness checks, so new formats define their own editing actions."
+      ]
+    },
+    {
+      "slug": "sofr-forecasting",
+      "category": "Quant & ML",
+      "title": "SOFR Forecasting & Futures Pricing Model",
+      "stack": "Python, Arbitrage-Free Nelson-Siegel, particle filtering, CME SOFR futures",
+      "tags": ["quant", "time series", "state-space models", "Python"],
+      "summary": "A SOFR rate forecasting model that estimates the latent term-structure state and prices futures for spread-trading signals.",
+      "bullets": [
+        "Built a SOFR rate forecasting model on the Arbitrage-Free Nelson-Siegel framework in Python.",
+        "Implemented a particle filter (Sequential Importance Resampling) instead of a Kalman filter to estimate latent state variables — level, slope, and curvature — from historical SOFR data.",
+        "Calibrated on daily settlement SOFR rates and CME SOFR futures prices, predicting futures at 5-minute intervals.",
+        "Identified mean-reversion levels to signal entry points for spread-trading strategies (flies, strips, packs, bundles)."
+      ]
+    },
+    {
+      "slug": "mean-reversion",
+      "category": "Quant & ML",
+      "title": "Mean-Reverting Portfolio Optimization",
+      "stack": "Python, CVXPY, SPASM, scikit-learn, SDP / Sparse PCA",
+      "tags": ["quant", "convex optimization", "portfolio", "Python"],
+      "summary": "An engine that searches for synthetic mean-reverting portfolios via convex optimization and backtests them.",
+      "bullets": [
+        "Built a Python engine to search for synthetic mean-reverting portfolios by minimizing predictability, Portmanteau, and crossing statistics with SDP relaxations.",
+        "Solved the convex optimization via Sparse PCA using CVXPY, SPASM, and scikit-learn.",
+        "Backtested 150 options (2015–2020) with Jurek & Yang's strategy across the top 50 portfolios, achieving Sharpe ratios of 1.8–2.3.",
+        "Reduced transaction costs 20–35% by designing sparse portfolios that minimized the number of assets traded."
+      ]
+    },
+    {
+      "slug": "ibkr-bot",
+      "category": "Quant & ML",
+      "title": "Interactive Brokers Trading Bot",
+      "stack": "Python, Interactive Brokers API, Matplotlib, Plotly",
+      "tags": ["quant", "trading", "risk", "Python"],
+      "summary": "A variance-minimization trading bot that diversifies risk across S&P 500 sectors with monthly rebalancing.",
+      "bullets": [
+        "Designed a portfolio variance-minimization trading bot via the Interactive Brokers API, diversifying across 11 S&P 500 sectors with monthly rebalancing.",
+        "Achieved annualized volatility around 6.3% and annualized risk-adjusted returns around 5%.",
+        "Built dynamic dashboards (Matplotlib, Plotly) tracking sector allocations, returns, and volatility."
+      ]
+    },
+    {
+      "slug": "image-classifier",
+      "category": "Quant & ML",
+      "title": "Figure-Extraction Deep-Learning Pipeline",
+      "stack": "Python, deep learning, arXiv dataset, Hungarian algorithm",
+      "tags": ["machine learning", "computer vision", "data pipeline", "Python"],
+      "summary": "A distantly-supervised pipeline that extracts and indexes tabular figures from hundreds of thousands of scanned research papers.",
+      "bullets": [
+        "Built a distantly-supervised neural-network pipeline to extract and index tabular figures from 200k+ scanned research papers.",
+        "Auto-generated high-quality training labels from arXiv metadata instead of hand-labeling.",
+        "Evaluated bounding-box accuracy by matching predictions to ground truth via the Hungarian algorithm."
+      ]
+    },
+    {
+      "slug": "thread-pool",
+      "category": "Systems",
+      "title": "Work-Stealing Thread Pool & Fork-Join Framework (C++)",
+      "stack": "C++, lock-free queues, atomics, OS threading",
+      "tags": ["systems", "concurrency", "C++"],
+      "summary": "A C++ fork-join runtime for dynamic task parallelism, optimized for low synchronization overhead.",
+      "bullets": [
+        "Built a work-stealing thread pool and fork-join runtime for divide-and-conquer parallelism.",
+        "Minimized per-task synchronization overhead using Dijkstra's mutual-exclusion algorithm over lock-based deques.",
+        "Tested scalability and robustness with up to 50 worker threads and input sizes from n = 20 to 200k."
+      ]
+    },
+    {
+      "slug": "skiplist-dbms",
+      "category": "Systems",
+      "title": "Probabilistic DBMS Index Using Skip Lists",
+      "stack": "C++, probabilistic data structures",
+      "tags": ["systems", "databases", "data structures", "C++"],
+      "summary": "A DBMS indexing structure using skip lists for expected O(log n) operations, benchmarked against tree-based indices.",
+      "bullets": [
+        "Implemented a DBMS index using skip lists for expected O(log n) search, insertion, and deletion.",
+        "Used probabilistic balancing to promote frequently-accessed elements.",
+        "Evaluated performance tradeoffs against tree-based indices."
       ]
     }
   ],
   "experience": [
     {
-      "company": "Lutron",
-      "role": "Project Application Software Engineer",
+      "company": "Lutron Electronics",
+      "role": "Project Application Software Engineer → Senior (promoted Dec 2023)",
       "dates": "Jan 2022 – Present",
       "bullets": [
-        "Built the DesignGPT prototype embeddable AI-agent framework (above), repurposing WebGPT's engine pattern for Lutron web applications.",
-        "Automated and optimized mission-critical Azure deployment workflows with CI/CD and DevOps processes.",
-        "Resolved 100+ production bugs and multiple P1/P2 outages by prioritizing customer-impacting failures and coordinating fixes across production systems.",
-        "Built React and serverless features (AWS Lambda/S3) for home-automation workflows, including complex scene creation.",
-        "Created a React microfrontend embedded in a WPF application consuming Logik.io headless APIs; delivered MuleSoft middleware integrating WPF with Salesforce CPQ and Logik.io, with a Maven CI/CD pipeline for Anypoint.",
-        "Served as epic owner for exporting line items to Salesforce — translating ambiguous business needs into stories and coordinating cross-team delivery."
+        "Built an internal AI design-assistant chatbot on AWS Bedrock, indexing Lutron's UX-principles docs (RAG) to give designers and product managers context-aware guidance and rapid validation of new UI proposals.",
+        "Built DesignGPT, a prototype embeddable AI-agent framework — WebGPT's engine as a Node module — so Lutron web applications could expose their own domain skills while the framework handled chat, planning, and execution.",
+        "Designed distributed backend services in Go exposing standardized APIs for rule evaluation and asset generation, including a fault-tolerant image-generation pipeline (Go Lambdas, SQS, API Gateway, S3) with a decoupled producer/consumer design.",
+        "Architected Bill-of-Materials services (hierarchical grouping, batch operations, rollback, deterministic state sync) and a MuleSoft–Go integration mapping product models to Salesforce RLM for an ERP migration.",
+        "Built a React + TypeScript micro-frontend (container-presenter, Zustand) with real-time 3D product visualization (Threekit), cutting design rework ~40%; added Cypress visual-regression gates to CI/CD.",
+        "Earlier: resolved 100+ production defects and multiple P1/P2 outages during a multi-system ERP transition; shipped an Azure C# notification service (retry, telemetry, SLA) and a REST-to-LEAP translation layer for real-time device control."
       ]
     },
     {
-      "company": "Earlier Software Engineering Roles",
-      "role": "Infinite Solutions · Euronet · Jet Airways",
-      "dates": "2018 – 2021",
+      "company": "Infinite Solutions",
+      "role": "Software Engineer",
+      "dates": "Jul 2021 – Jan 2022",
       "bullets": [
-        "Built Java Spring / Angular healthcare web systems, REST and WebSocket APIs, banking microservices, Kubernetes-deployed services, Python prediction workflows, and Android integrations before joining Lutron full-time."
+        "Migrated Mississippi's state healthcare-support site to AWS and refactored it to Java Spring and Angular under HIPAA; shipped WebSocket APIs for real-time updates and REST APIs for CRUD and search."
       ]
     }
   ],
   "skills": {
-    "Languages": "TypeScript, JavaScript, Python, Java, C#, C, C++, SQL, Bash, HTML, CSS",
-    "AI / Agents": "OpenAI APIs, planner/executor loops, browser agents, tool/action contracts, structured extraction, human-in-the-loop review, workflow replay",
-    "Frontend / Runtime": "React, Chrome MV3 Extensions, Vite, content scripts, service workers, Chrome Identity, OAuth, runtime surfaces",
-    "Backend / APIs": "Node.js, Express, OpenAPI, REST APIs, Microsoft Graph, Google Sheets API, run/session orchestration, artifact services",
-    "Cloud / DevOps": "Azure, AWS Lambda, S3, CI/CD, Railway, Kubernetes",
-    "Workflow Automation": "customer discovery, rapid prototyping, operations workflows, document automation, generative media workflows, reusable playbooks"
+    "Languages": "TypeScript, JavaScript, Go, Python, Java, C#, C, C++, SQL, Bash",
+    "AI / Applied AI": "OpenAI APIs, AWS Bedrock, RAG, MCP-style connectors, tool/function calling, planner-executor agents, browser agents, structured extraction, human-in-the-loop, evals & replay",
+    "Frontend": "React, TypeScript, micro-frontends, Zustand, Redux, GraphQL, Vite, Chrome MV3 extensions",
+    "Backend / Integration": "Node.js, Express, Go (Lambda, SQS, API Gateway), REST, OpenAPI, MuleSoft, Salesforce CPQ/RLM, Microsoft Graph, Google Sheets API",
+    "Cloud / DevOps": "AWS (Lambda, S3, SQS, Bedrock, API Gateway), Azure, Railway, CI/CD (GitHub Actions, Maven), Kubernetes"
   },
   "education": [
     {
       "school": "Harrisburg University of Science and Technology",
-      "degree": "M.S., Computer Information Sciences — Software Engineering / Software Testing concentration",
-      "meta": "GPA: 3.30 / 4.00 · 30 graduate credits completed"
+      "degree": "M.S., Computer Information Sciences (in progress) — Software Engineering concentration",
+      "meta": "30 graduate credits completed"
     },
     {
       "school": "Virginia Tech, College of Engineering",
       "degree": "B.S., Computer Science",
-      "meta": "GPA: 3.01 / 4.00 · Dean's List: Spring 2020 – Spring 2021"
+      "meta": "Dean's List: Spring 2020 – Spring 2021"
+    }
+  ],
+  "certificates": [
+    {
+      "name": "Pre-MFE: Advanced Calculus & Probability — Certificate of Distinction",
+      "issuer": "Baruch College (CUNY)",
+      "file": ""
     },
     {
-      "school": "Additional Quantitative Coursework",
-      "degree": "Baruch Pre-MFE Advanced Calculus and Probability (Certificate of Distinction); University of Chicago Linear Algebra and Python",
-      "meta": "Projects: mean-reverting portfolio optimization, SOFR futures modeling, trading bots, and options-data analysis."
+      "name": "Linear Algebra & Numerical Python",
+      "issuer": "University of Chicago",
+      "file": ""
     }
   ]
 }

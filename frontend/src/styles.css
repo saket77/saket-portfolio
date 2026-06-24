@@ -167,6 +167,11 @@ a:hover { text-decoration: underline; }
 .blog-md a { color: var(--accent); }
 .blog-md blockquote { margin: 0 0 16px; padding-left: 16px; border-left: 3px solid var(--line); color: var(--muted); }
 
+/* keep all prose left-aligned (never justified / "criss-cross") and wrap long words cleanly */
+body, .hero-tagline, .card-summary, .card-bullets li, .blog-intro,
+.blog-md, .blog-md p, .blog-md li, .msg, .msg .md p, .msg .md li { text-align: left; }
+.blog-md, .blog-md p, .blog-md li, .card-summary, .card-bullets li { overflow-wrap: break-word; hyphens: none; }
+
 /* ---------- chat ---------- */
 .chat-fab {
   position: fixed; right: 22px; bottom: 22px; z-index: 50;

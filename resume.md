@@ -1,82 +1,76 @@
 # Saket Mundhada
 
-Philadelphia, PA | (917) 690-4451 | saketmundhada7@gmail.com | [LinkedIn](https://www.linkedin.com/in/spm1234) | [GitHub](https://github.com/saket77) | [WebGPT](https://github.com/saket77/webgpt-frontend) | [YouTube Demo](https://youtube.com/shorts/Y_MClhc6Khg)
+Philadelphia, PA | (917) 690-4451 | saketmundhada7@gmail.com | [LinkedIn](https://www.linkedin.com/in/spm1234) | [GitHub](https://github.com/saket77) | [Portfolio](https://saket-portfolio-production.up.railway.app)
 
 ## Summary
 
-Full-stack AI automation engineer who scopes messy business workflows, builds LLM-powered prototypes, and turns working patterns into reusable agent runtimes. Built WebGPT, an open-source browser/spreadsheet agent system; deployed WebGPT-powered workflows for a real estate operations team; and prototyped DesignGPT, an embeddable enterprise AI-agent framework for Lutron web applications.
+Full-stack AI automation engineer who scopes messy business workflows, builds LLM-powered prototypes, and turns working patterns into reusable agent runtimes. Built WebGPT, an open-source browser/spreadsheet agent system; deployed WebGPT-powered workflows for a real estate operations team; and prototyped DesignGPT, an embeddable enterprise AI-agent framework for Lutron web applications. Targeting Forward Deployed / Applied AI engineering roles.
 
 ## Skills
 
-**Languages:** TypeScript, JavaScript, Python, Java, C#, C, C++, SQL, Bash, HTML, CSS  
-**AI / Agents:** OpenAI APIs, planner/executor loops, browser agents, tool/action contracts, structured extraction, human-in-the-loop review, workflow replay  
-**Frontend / Runtime:** React, Chrome MV3 Extensions, Vite, content scripts, service workers, Chrome Identity, OAuth, runtime surfaces  
-**Backend / APIs:** Node.js, Express, OpenAPI, REST APIs, Microsoft Graph, Google Sheets API, run/session orchestration, artifact services  
-**Cloud / DevOps:** Azure, AWS Lambda, S3, CI/CD, Railway, Kubernetes  
-**Workflow Automation:** customer discovery, rapid prototyping, operations workflows, document automation, generative media workflows, reusable playbooks
+**Languages:** TypeScript, JavaScript, Go, Python, Java, C#, C, C++, SQL, Bash
+
+**AI / Applied AI:** OpenAI APIs, AWS Bedrock, RAG, MCP-style connectors, tool/function calling, planner-executor agents, browser agents, structured extraction, human-in-the-loop, evals & replay
+
+**Frontend:** React, TypeScript, micro-frontends, Zustand, Redux, GraphQL, Vite, Chrome MV3 extensions
+
+**Backend / Integration:** Node.js, Express, Go (Lambda, SQS, API Gateway), REST, OpenAPI, MuleSoft, Salesforce CPQ/RLM, Microsoft Graph, Google Sheets API
+
+**Cloud / DevOps:** AWS (Lambda, S3, SQS, Bedrock, API Gateway), Azure, Railway, CI/CD (GitHub Actions, Maven), Kubernetes
 
 ## Projects
 
-### WebGPT - Open-Source AI Workflow Agent Platform
+### WebGPT — Open-Source AI Workflow Agent Platform
+TypeScript, React, Chrome MV3, Node.js, Express, OpenAI APIs, OpenAPI, Google Sheets API · [Demo](https://youtube.com/shorts/Y_MClhc6Khg) · [Code](https://github.com/saket77/webgpt-frontend)
 
-**TypeScript, React, Chrome MV3, Node.js, Express, OpenAI APIs, OpenAPI, Google Sheets API, Microsoft Graph**
+- Published a Chrome extension with a deployed hosted planner backend that turns natural-language goals into executed workflows across the browser, Google Sheets, and Excel.
+- Designed a connector model — MCP-server-style — where site adapters and API-backed "surfaces" are different flavors of connectors the agent plugs into, alongside bring-your-own planner backends via an OpenAPI-style contract.
+- Built the Chrome runtime (sidepanel UX, state extraction, action execution, navigation recovery, replay) and the Express planner backend (command/result loops, run snapshots, artifacts, tests).
 
-- Published WebGPT as a Chrome extension for beta users with a deployed hosted planner backend, enabling natural-language workflows across browser, spreadsheet, and document-heavy operations.
-- Built an open-source agent platform that turns natural-language goals into browser actions, spreadsheet API operations, and replayable workflows across `browser_dom`, `browser_cdp`, `google_sheets`, and `microsoft_excel` surfaces.
-- Designed WebGPT as reusable infrastructure for customer-specific workflows: site/content adapters for messy web apps, runtime surfaces for API-backed tools, and bring-your-own planner backends through an OpenAPI-style contract.
-- Built the Chrome frontend runtime with sidepanel UX, structured multi-frame state extraction, action execution, navigation recovery, human hints, success confirmation, saved artifacts, template queues, and workflow replay.
-- Added five loaded site/content adapters for Canvas quiz workflows, Yelp, NCM movie calendars, DocuSign, and Dotloop, turning brittle web pages into planner-readable workflow surfaces.
-- Built the hosted default planner backend used by the frontend, including Express APIs for command runs, command-result loops, run snapshots, lifecycle controls, human feedback, artifacts, and template queues.
-- Implemented backend orchestration for browser actions, replay batches, Google Sheets commands, Microsoft Excel commands, navigation waits, human assistance, and done states.
-- Added replay preflight, successful-run artifacts, execution traces, input binding, template goal substitution, surface-aware planning, post-step processing, state deltas, action-effect summaries, and backend test coverage.
+### POC Biotech — AI Inventory & Ordering Assistant (Client Deployment)
+Node.js, Express, OpenAI tool-calling, SQLite, Railway
 
-### Student Landing - Real Estate Operations Automation
+- Built and deployed a production AI assistant for a Mumbai pharmaceutical distributor that answers natural-language questions over their ERP data — stock on hand, expiry, reorder suggestions, and slow movers.
+- Reduced purchasing ~3% by forecasting reorders against sitting inventory and flagging slow-moving and soon-to-expire stock.
+- Implemented an OpenAI tool-calling agent with read-only analytics tools and guarded SQL over normalized purchase/sale transactions; routed quote requests by email.
+- Forward-deployed end to end: scoped the workflow with the owner, parsed their Excel exports, and shipped a single Railway service.
 
-**WebGPT, Dotloop, Atlas Philly, Philadelphia government websites, workflow automation**
+### Student Landing — Real Estate Operations Automation (Forward-Deployed)
+WebGPT, Dotloop, Atlas Philly, Philadelphia government websites · [Demo](https://youtube.com/shorts/Y_MClhc6Khg) · [Code](https://github.com/saket77/webgpt-frontend)
 
-- Partnered with Student Landing, a Philadelphia student-services real estate firm, to automate document and property-verification workflows used by its operations team.
-- Mapped operator workflows for preparing and sending agreements in Dotloop, then deployed WebGPT-powered routines that convert repeatable document steps into guided browser-agent workflows.
-- Built property-verification workflows that collect and cross-check lead information from Atlas Philly and Philadelphia government websites, reducing repeated manual lookup work during real-estate operations.
-- Used the deployment to harden WebGPT's Dotloop adapter, source-value extraction, document-field mapping, workflow replay, and human-review patterns for real operator use.
+- Embedded with a Philadelphia real-estate firm's operations team and deployed WebGPT routines that automate Dotloop agreement prep and property verification against city and third-party sites.
+- Built WebGPT's Dotloop connector, driving Dotloop via API calls rather than brittle DOM steps — with field mapping and human-review patterns — now being promoted to a first-class "surface" (like Google Sheets) for speed.
 
-### CropGPT - Intent-to-Edit Media Automation Engine
+### CropGPT — Intent-to-Edit Media Automation Engine
+Python, FFmpeg, OpenAI APIs, image-generation models, JSON Schema · [Demo](https://youtube.com/shorts/Y_MClhc6Khg) · [Code](https://github.com/saket77/webgpt-frontend)
 
-**Python, FFmpeg, JSON Schema, CLI tooling, media QA**
-
-- Built CropGPT, a creative workflow system that translates intent into reusable edit actions such as cropping, stacking, captioning, CTA placement, audio normalization, export, and QA.
-- Used CropGPT to produce WebGPT YouTube Shorts demo videos from product recordings, creating vertical demos with branded captions, transcripts, contact sheets, metadata, and review notes.
-- Extended CropGPT into generative interior-design workflows with an interior-design collaborator, translating rough room plans and style intent into furnished-room image-generation specs for review and iteration.
-- Implemented a recipe-driven media pipeline with validation, deterministic FFmpeg rendering, loudness checks, and review reports so new video formats can define their own editing actions instead of relying on one-off scripts.
+- Translates creative intent into reusable edit actions (crop, caption, CTA placement, audio normalization, export, QA); produced WebGPT's demo videos.
+- Extended into generative interior-design workflows using OpenAI APIs and image-generation models: rough room plans and style intent become furnished-room image specs for review and iteration.
 
 ## Experience
 
-### Lutron - Project Application Software Engineer
+### Lutron Electronics — Project Application Software Engineer → Senior (promoted Dec 2023)
+Philadelphia, PA | Jan 2022 – Present
 
-**Jan 2022 - Present**
+- Built an internal AI design-assistant chatbot on AWS Bedrock, indexing Lutron's UX-principles docs (RAG) to give designers and product managers context-aware guidance and rapid validation of new UI proposals.
+- Built DesignGPT, a prototype embeddable AI-agent framework — WebGPT's engine packaged as a Node module — so Lutron web applications could expose their own domain skills while the framework handled chat, planning, and execution.
+- Designed distributed backend services in Go exposing standardized APIs for rule evaluation and asset generation, including a fault-tolerant image-generation pipeline (Go Lambdas, SQS, API Gateway, S3) with a decoupled producer/consumer design.
+- Architected Bill-of-Materials services (hierarchical grouping, batch operations, rollback, deterministic state sync) and a MuleSoft–Go integration mapping product models to Salesforce RLM for an ERP migration.
+- Built a React + TypeScript micro-frontend (container-presenter, Zustand) with real-time 3D product visualization (Threekit), cutting design rework ~40%; added Cypress visual-regression gates to CI/CD.
+- Resolved 100+ production defects and multiple P1/P2 outages during a multi-system ERP transition, protecting revenue-critical quoting and ordering workflows.
+- Shipped an Azure C# notification service automating high-volume quote and order communications, with retry logic, telemetry, and SLA-aligned delivery.
+- Integrated a React micro-frontend into a WPF desktop application (WebView, service workers, offline caching) for a hybrid desktop–web experience with local fallback.
+- Built a REST-to-LEAP translation layer for real-time control of Lutron devices — lighting, scenes, and shades — with command serialization and state validation.
 
-- Built a prototype embeddable AI-agent framework for Lutron web applications, repurposing WebGPT's engine pattern so host applications could expose domain skills while the agent handled chat, planning, and execution mechanics.
-- Automated and optimized mission-critical Azure deployment workflows, using CI/CD and DevOps processes to move code and content from development to production.
-- Resolved 100+ production bugs and multiple P1/P2 outages by prioritizing customer-impacting failures, debugging root causes, and coordinating fixes across production systems.
-- Built React and serverless features for home-automation workflows, including AWS Lambda/S3-backed web functionality for creating complex scenes.
-- Created a React microfrontend embedded in a WPF application, consuming Logik.io headless APIs to support configurable product selection in a design-to-order workflow.
-- Delivered MuleSoft middleware integrating a WPF application with Salesforce CPQ and Logik.io, then built a Maven-based CI/CD pipeline for Anypoint deployment.
-- Served as epic owner for exporting line items to Salesforce, translating ambiguous business needs into development stories, unblocking engineers, and coordinating cross-team delivery.
+### Infinite Solutions — Software Engineer
+Remote | Jul 2021 – Jan 2022
 
-### Earlier Software Engineering Roles
-
-**Infinite Solutions, Euronet, Jet Airways | 2018 - 2021**
-
-- Built Java Spring / Angular healthcare web systems, REST and WebSocket APIs, banking microservices, Kubernetes-deployed services, Python prediction workflows, and Android integrations before joining Lutron full-time.
+- Migrated Mississippi's state healthcare-support site to AWS and refactored it to Java Spring and Angular under HIPAA; shipped WebSocket APIs for real-time updates and REST APIs for CRUD and search.
 
 ## Education
 
-**Harrisburg University of Science and Technology**  
-M.S., Computer Information Sciences — Software Engineering / Software Testing concentration  
-GPA: 3.30 / 4.00 · 30 graduate credits completed  
+**Harrisburg University of Science and Technology** — M.S., Computer Information Sciences (in progress), Software Engineering concentration · 30 graduate credits completed
 
-**Virginia Tech, College of Engineering**  
-B.S., Computer Science  
-GPA: 3.01 / 4.00 · Dean's List: Spring 2020 – Spring 2021  
+**Virginia Tech** — B.S., Computer Science · Dean's List (Spring 2020 – Spring 2021)
 
-**Additional Quantitative Coursework**  
-Baruch Pre-MFE Advanced Calculus and Probability (Certificate of Distinction); University of Chicago Linear Algebra and Python. Projects: mean-reverting portfolio optimization, SOFR futures modeling, trading bots, and options-data analysis.
+**Certifications:** Baruch College (CUNY) Pre-MFE Advanced Calculus & Probability, Certificate of Distinction; University of Chicago Linear Algebra & Numerical Python

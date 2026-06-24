@@ -1,35 +1,61 @@
 ---
-title: Building WebGPT — turning natural-language goals into executed workflows
+title: Building WebGPT — an open-source runtime for AI browser agents
 date: 2026-06-20
 slug: building-webgpt
-summary: Why I built an open-source browser/spreadsheet agent platform, and what shipping it to real users taught me about reusable agent infrastructure.
-tags: webgpt, agents, browser, forward-deployed
+summary: What WebGPT is, how it's built, and the connector model that lets one agent work across real websites, Google Sheets, and Excel.
+tags: webgpt, agents, browser, connectors
 ---
 
-I keep coming back to one idea: most "AI workflow" tools break the moment they touch a messy, real-world web app. WebGPT is my attempt to fix that — an open-source platform that turns a natural-language goal into actually-executed work across the browser, spreadsheets, and documents.
+Most "AI workflow" tools break the moment they touch a messy, real-world web app. WebGPT is my attempt to fix that: an open-source Chrome runtime for AI browser agents that turns a plain-English goal into actually-executed work — across the browser, Google Sheets, and Excel.
+
+> ▶ **Watch the demo:** [WebGPT in action](https://youtu.be/J1yGDs0M-gA)
 
 ## What it does
 
-You give it a goal in plain English. WebGPT plans the steps, then executes them across several surfaces:
+You give it a goal in plain English. WebGPT observes the current tab, extracts structured state, plans the steps, and executes them — pausing for your confirmation before anything sensitive. When a run succeeds, you can save it as a routine and replay it across new inputs.
 
-- `browser_dom` and `browser_cdp` for clicking, reading, and navigating real pages
-- `google_sheets` and `microsoft_excel` for spreadsheet operations through their APIs
-- replayable workflows, so a one-off run becomes a reusable routine
+It ships as a **Chrome MV3 extension** with a **hosted planner backend**: a sidepanel UX on the front, an Express command/result API on the back.
 
-It ships as a **Chrome MV3 extension** with a **hosted planner backend** — a sidepanel UX on the front, an Express run/command API on the back.
+## How it's built: a clean runtime/planner boundary
 
-## The hard part: messy web apps
+The thing I care most about architecturally is the boundary. Most browser agents fuse planning, browser execution, and app-specific logic into one tangled loop. WebGPT splits them:
 
-Real operations don't happen on clean, well-structured pages. They happen in Dotloop, in county government portals, in tools that were never designed for automation. So WebGPT is built around **site/content adapters**: small shims that turn a brittle page into a planner-readable surface. Add an adapter, and a new messy app becomes automatable.
+- **The extension owns execution.** Browser state extraction, action execution, navigation handling, sidepanel UX, runtime auth, human confirmation.
+- **The backend owns planning.** It's swappable — point the extension at the hosted planner, or at *any* backend that speaks the documented HTTP contract (there's an OpenAPI spec for it).
 
-The runtime handles the un-glamorous reality of automation too: structured multi-frame state extraction, navigation recovery, human hints when the agent is unsure, success confirmation, and saved artifacts.
+That separation means I can iterate on the planner without touching the runtime, and someone else can bring their own planner without forking the extension.
 
-## What deploying it taught me
+## The connector model
 
-The biggest lessons came from putting it in front of a real operations team (see the Student Landing work). Production hardened everything — the Dotloop adapter, source-value extraction, document-field mapping, replay, and the human-review patterns. You don't learn where an agent breaks until a real operator runs it on a Tuesday afternoon with a deadline.
+Here's the idea I'm most excited about. Instead of hard-coding support for each app, WebGPT treats every integration as a **connector** — and connectors come in different flavors:
 
-That's the loop I care about: build the prototype, embed with the customer, ship it, and let the real usage tell you what reusable infrastructure actually needs to exist.
+- **Site adapters** add domain-specific reliability for specific websites where generic DOM extraction isn't enough. They enrich state and provide stable mappings; they don't execute actions or call the planner directly.
+- **Runtime surfaces** route non-DOM products like **Google Sheets** and **Microsoft Excel** through dedicated API clients, while keeping the *same* planner loop.
 
-## What's next
+If you've used Claude's connectors or thought about MCP, the mental model will feel familiar: you teach the agent a new app by adding a connector, not by rewriting the agent. Adding Excel didn't change the planning loop — it added a connector. (More on the Excel and Sheets connectors in the next two posts.)
 
-I'm extending the same intent-to-action engine into new product surfaces — that's what DesignGPT is, embedded inside Lutron web apps. More on that soon.
+## Structured state over screenshots
+
+WebGPT extracts structured browser state — URLs, frames, visible text, controls, labels, scroll containers, and adapter-provided hints — instead of throwing raw screenshots at the model. That gives the planner a far cleaner interface than pixel-only reasoning, and it's a big part of why the agent stays reliable on real pages.
+
+## Human-in-the-loop and recovery
+
+Real automation is mostly edge cases. WebGPT handles the un-glamorous parts: it pauses for human confirmation before sensitive actions, accepts human hints when it's unsure, detects likely navigation and waits for the new document before resuming, and confirms success at the end.
+
+## Replayable routines
+
+A one-off agent run is a demo. A *saved, replayable* run is infrastructure. WebGPT turns successful runs into reusable routines that re-run across new inputs — so you're not paying for the model to rediscover every click each time. That's the workflow layer, and it's the next post.
+
+## What shipping it taught me
+
+The biggest lessons came from putting WebGPT in front of a real operations team (the Student Landing work). Production hardened everything — the Dotloop connector, field mapping, replay, and the human-review patterns. You don't learn where an agent breaks until a real operator runs it on a Tuesday afternoon with a deadline.
+
+That's the loop I care about: build the prototype, embed with the customer, ship it, and let real usage tell you what reusable infrastructure actually needs to exist.
+
+## Released to beta — and what's next
+
+WebGPT is **released to beta users**, and I'm building on it constantly. The feature I'm most excited about next: a **user-facing skill that lets anyone create a connector for any website** — through the DOM or the site's API — without writing adapter code. WebGPT handles the messy parts of auth for you, including **OAuth and PKCE**, so connecting a new tool is a setup step, not an engineering project. The same path takes heavy-use sites (like Dotloop) from a DOM site adapter to a first-class, API-backed surface for speed.
+
+---
+
+**Links:** [WebGPT on GitHub](https://github.com/saket77/webgpt-frontend) · [Demo](https://youtu.be/J1yGDs0M-gA). Questions? The assistant on my site knows this project well — ask it anything.
