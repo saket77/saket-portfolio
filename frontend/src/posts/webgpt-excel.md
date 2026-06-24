@@ -6,7 +6,7 @@ summary: A spreadsheet isn't a DOM you click. So WebGPT talks to Microsoft Excel
 tags: webgpt, excel, microsoft-graph, connectors
 ---
 
-WebGPT just crossed into Excel. Not Google Sheets — **Microsoft Excel**.
+WebGPT just crossed into Excel. — **Microsoft Excel**.
 
 > ▶ **Watch the 30-second demo:** _add your Excel short link here_
 
