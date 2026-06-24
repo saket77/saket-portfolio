@@ -1,11 +1,12 @@
 import { Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
 import {
   Github, Linkedin, Youtube, FileDown, Mail, MapPin, Sparkles,
-  ArrowUpRight, GraduationCap, Briefcase, Wrench, MessageSquare
+  ArrowUpRight, GraduationCap, Briefcase, Wrench, MessageSquare, PenLine, Award
 } from "lucide-react";
 import content from "./content.json";
 import Chat from "./Chat.jsx";
 import { BlogIndex, BlogPost } from "./Blog.jsx";
+import { posts } from "./posts/index.js";
 
 function scrollToId(id) {
   const el = document.getElementById(id);
@@ -78,28 +79,45 @@ function SectionTitle({ icon, children }) {
   return <h2 className="section-title">{icon}<span>{children}</span></h2>;
 }
 
+function relatedPosts(slugs = []) {
+  return slugs.map((s) => posts.find((p) => p.slug === s)).filter(Boolean);
+}
+
 function Projects() {
   return (
     <section id="projects" className="section">
       <SectionTitle icon={<Sparkles size={20} />}>Projects</SectionTitle>
       <div className="projects">
-        {content.projects.map((p) => (
-          <article key={p.slug} id={`project-${p.slug}`} className="card">
-            <h3 className="card-title">{p.title}</h3>
-            <p className="card-stack">{p.stack}</p>
-            <p className="card-summary">{p.summary}</p>
-            <ul className="card-bullets">
-              {p.bullets.map((b, i) => <li key={i}>{b}</li>)}
-            </ul>
-            <div className="tags">{p.tags.map((t) => <span key={t} className="tag">{t}</span>)}</div>
-            {p.slug === "webgpt" && (
-              <div className="card-links">
-                <a href={content.links.webgpt} target="_blank" rel="noreferrer">Code <ArrowUpRight size={14} /></a>
-                <a href={content.links.youtube} target="_blank" rel="noreferrer">Demo <ArrowUpRight size={14} /></a>
-              </div>
-            )}
-          </article>
-        ))}
+        {content.projects.map((p) => {
+          const links = p.links || {};
+          const rel = relatedPosts(p.blogSlugs);
+          return (
+            <article key={p.slug} id={`project-${p.slug}`} className="card">
+              <h3 className="card-title">{p.title}</h3>
+              <p className="card-stack">{p.stack}</p>
+              <p className="card-summary">{p.summary}</p>
+              <ul className="card-bullets">
+                {p.bullets.map((b, i) => <li key={i}>{b}</li>)}
+              </ul>
+              <div className="tags">{p.tags.map((t) => <span key={t} className="tag">{t}</span>)}</div>
+              {(links.demo || links.repo || links.backend) && (
+                <div className="card-links">
+                  {links.demo && <a href={links.demo} target="_blank" rel="noreferrer">Demo <ArrowUpRight size={14} /></a>}
+                  {links.repo && <a href={links.repo} target="_blank" rel="noreferrer">Code <ArrowUpRight size={14} /></a>}
+                  {links.backend && <a href={links.backend} target="_blank" rel="noreferrer">Backend <ArrowUpRight size={14} /></a>}
+                </div>
+              )}
+              {rel.length > 0 && (
+                <div className="card-posts">
+                  <span className="card-posts-label">Writing:</span>
+                  {rel.map((post) => (
+                    <Link key={post.slug} to={`/blog/${post.slug}`} className="card-post-link">{post.title}</Link>
+                  ))}
+                </div>
+              )}
+            </article>
+          );
+        })}
       </div>
     </section>
   );
@@ -176,14 +194,52 @@ function Footer() {
   return <footer className="footer">© {new Date().getFullYear()} {content.name} · Built with an AI agent that knows my resume.</footer>;
 }
 
+function Writing() {
+  const recent = posts.slice(0, 3);
+  if (recent.length === 0) return null;
+  return (
+    <section id="writing" className="section">
+      <SectionTitle icon={<PenLine size={20} />}>Writing</SectionTitle>
+      <p className="blog-intro">Check out <Link to="/blog" className="card-post-link">the blog</Link> to see the latest and greatest of WebGPT and other products.</p>
+      <div className="blog-list">
+        {recent.map((post) => (
+          <article key={post.slug} className="blog-card">
+            <Link to={`/blog/${post.slug}`} className="blog-card-title">{post.title}</Link>
+            {post.date && <p className="blog-card-date">{post.date}</p>}
+            {post.summary && <p className="blog-card-summary">{post.summary}</p>}
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Certificates() {
+  const certs = content.certificates || [];
+  if (certs.length === 0) return null;
+  return (
+    <section id="certificates" className="section">
+      <SectionTitle icon={<Award size={20} />}>Certificates</SectionTitle>
+      {certs.map((c, i) => (
+        <div key={i} className="edu">
+          <h3>{c.name}</h3>
+          <p className="edu-meta">{c.issuer}{c.file ? <> · <a href={c.file} target="_blank" rel="noreferrer">view</a></> : null}</p>
+        </div>
+      ))}
+    </section>
+  );
+}
+
 function Home() {
   return (
     <main className="container">
       <Hero />
       <Projects />
+      <Writing />
       <Experience />
       <Skills />
       <Education />
+      <Certificates />
       <Contact />
     </main>
   );

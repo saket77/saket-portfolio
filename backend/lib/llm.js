@@ -94,7 +94,7 @@ const TOOLS = [
     type: "function",
     function: {
       name: "show_blog_post",
-      description: "Open one of Saket's blog posts on the page when it's relevant to recommend his writing. Use a slug from the 'Recent writing' list in the system prompt.",
+      description: "Open one of Saket's blog posts on the page. Use this when the user asks to read or open a post, asks about a topic Saket has written about (WebGPT, Excel, Google Sheets, templates, connectors), or asks for the latest/most recent post. Pass a slug from the 'Recent writing' list — the first item there is the most recent.",
       parameters: {
         type: "object",
         properties: { slug: { type: "string", description: "The post slug, e.g. 'building-webgpt'." } },
@@ -178,8 +178,8 @@ function buildSystemPrompt(content) {
   const email = content.email || "saketmundhada7@gmail.com";
   const writing = posts.list();
   const writingBlock = writing.length
-    ? ["Recent writing (call show_blog_post with the slug to open one on the page):",
-       ...writing.map((p) => `- ${p.slug}: "${p.title}"${p.summary ? ` — ${p.summary}` : ""}`)].join("\n")
+    ? ["Recent writing — ordered newest first; the FIRST item is the most recent. Call show_blog_post with the slug to open one on the page:",
+       ...writing.map((p, i) => `- ${p.slug}: "${p.title}"${p.date ? ` (${p.date}${i === 0 ? ", most recent" : ""})` : ""}${p.summary ? ` — ${p.summary}` : ""}`)].join("\n")
     : "Saket has no blog posts published yet.";
   return [
     `You are "Ask-Saket", the AI assistant embedded in Saket Mundhada's portfolio website.`,
@@ -200,7 +200,7 @@ function buildSystemPrompt(content) {
     `- When your answer centers on a project, call show_project (and/or scroll_to) so the page follows along.`,
     `- If the user pastes or describes a job/role, call analyze_job_fit first, then write a tailored "why Saket fits" naming the most relevant projects.`,
     `- If the user shows hiring intent or wants to connect, ask for their name, email, company, and the role, then call capture_lead. Offer open_booking to reach out and download_resume for the PDF.`,
-    `- When a question relates to something Saket has written about, mention the post and call show_blog_post to open it. Only reference posts from the "Recent writing" list above.`,
+    `- When a question relates to something Saket has written about (a WebGPT feature, Excel, Google Sheets, templates, connectors), call show_blog_post to open the matching post. If the user asks to open the latest or most recent post, call show_blog_post with the FIRST (newest) slug in the list. Only reference posts from the "Recent writing" list above.`,
     `- For anything off-topic or not in the resume, say so briefly and point them to ${email}.`
   ].join("\n");
 }

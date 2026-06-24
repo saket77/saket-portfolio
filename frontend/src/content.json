@@ -22,7 +22,7 @@
       "stack": "TypeScript, React, Chrome MV3, Node.js, Express, OpenAI APIs, OpenAPI, Google Sheets API, Microsoft Graph",
       "tags": ["browser agents", "MCP-style connectors", "Chrome MV3", "OpenAI", "spreadsheets", "OpenAPI", "workflow replay", "full-stack"],
       "summary": "An open-source Chrome runtime for AI browser agents that turns plain-English goals into executed work across the browser, Google Sheets, and Excel — built around a clean runtime/planner boundary and a connector model. Released to beta users and under active development.",
-      "links": { "demo": "https://youtu.be/J1yGDs0M-gA", "repo": "https://github.com/saket77/webgpt-frontend" },
+      "links": { "demo": "https://youtu.be/J1yGDs0M-gA", "repo": "https://github.com/saket77/webgpt-frontend", "backend": "https://github.com/saket77/webgpt-backend" },
       "blogSlugs": ["building-webgpt", "webgpt-reusable-templates", "webgpt-excel", "webgpt-google-sheets"],
       "bullets": [
         "Published a Chrome MV3 extension with a deployed hosted planner backend that turns natural-language goals into executed workflows across the browser, Google Sheets, and Excel.",
@@ -53,6 +53,7 @@
       "stack": "Node.js, Express, OpenAI tool-calling, SQLite, Railway, Resend",
       "tags": ["forward-deployed", "client deployment", "tool-calling agent", "ERP", "applied AI"],
       "summary": "A production AI assistant deployed for a Mumbai pharmaceutical distributor that answers natural-language questions over their ERP data and helps decide what to reorder.",
+      "links": { "repo": "https://github.com/saket77/pocbiotech-website" },
       "bullets": [
         "Built and deployed an OpenAI tool-calling agent that answers plain-English questions over the client's ERP data — stock on hand, expiry, reorder suggestions, and slow movers.",
         "Implemented read-only analytics tools plus guarded SELECT-only SQL over normalized purchase/sale transactions, so every number the model reports is grounded in real data.",
@@ -179,7 +180,10 @@
         "Designed distributed backend services in Go exposing standardized APIs for rule evaluation and asset generation, including a fault-tolerant image-generation pipeline (Go Lambdas, SQS, API Gateway, S3) with a decoupled producer/consumer design.",
         "Architected Bill-of-Materials services (hierarchical grouping, batch operations, rollback, deterministic state sync) and a MuleSoft–Go integration mapping product models to Salesforce RLM for an ERP migration.",
         "Built a React + TypeScript micro-frontend (container-presenter, Zustand) with real-time 3D product visualization (Threekit), cutting design rework ~40%; added Cypress visual-regression gates to CI/CD.",
-        "Earlier: resolved 100+ production defects and multiple P1/P2 outages during a multi-system ERP transition; shipped an Azure C# notification service (retry, telemetry, SLA) and a REST-to-LEAP translation layer for real-time device control."
+        "Resolved 100+ production defects and multiple P1/P2 outages during a multi-system ERP transition, protecting revenue-critical quoting and ordering workflows.",
+        "Shipped an Azure C# notification service automating high-volume quote and order communications, with retry logic, telemetry, and SLA-aligned delivery.",
+        "Integrated a React micro-frontend into a WPF desktop application (WebView, service workers, offline caching) for a hybrid desktop–web experience with local fallback.",
+        "Built a REST-to-LEAP translation layer for real-time control of Lutron devices — lighting, scenes, and shades — with command serialization and state validation."
       ]
     },
     {

@@ -58,4 +58,4 @@ WebGPT is **released to beta users**, and I'm building on it constantly. The fea
 
 ---
 
-**Links:** [WebGPT on GitHub](https://github.com/saket77/webgpt-frontend) · [Demo](https://youtu.be/J1yGDs0M-gA). Questions? The assistant on my site knows this project well — ask it anything.
+**Code:** [WebGPT frontend — the Chrome runtime](https://github.com/saket77/webgpt-frontend) · [WebGPT backend — the planner](https://github.com/saket77/webgpt-backend) · [Demo](https://youtu.be/J1yGDs0M-gA). Questions? The assistant on my site knows this project well — ask it anything.
