@@ -6,9 +6,9 @@ summary: A spreadsheet isn't a DOM you click. So WebGPT talks to Microsoft Excel
 tags: webgpt, excel, microsoft-graph, connectors
 ---
 
-WebGPT just crossed into Excel. — **Microsoft Excel**.
+WebGPT just crossed into Excel. — **Microsoft Excel**. 
 
-> ▶ **Watch the 30-second demo:** _add your Excel short link here_
+> ▶ **Watch the 30-second demo:** [demo](https://youtube.com/shorts/ar3Ihxkh4dU?feature=share)
 
 That distinction matters, because a spreadsheet isn't really a website. Trying to drive Excel by clicking cells through the DOM is brittle and slow — the layout shifts, virtualized grids don't render every cell, and one wrong click corrupts the sheet. So WebGPT doesn't treat Excel as a page to click. It treats it as a **connector**, backed by the Microsoft Graph API.
 

@@ -8,7 +8,7 @@ tags: webgpt, google-sheets, spreadsheets, connectors
 
 WebGPT now works in **all spreadsheets** — Microsoft Excel *and* Google Sheets.
 
-> ▶ **Watch the 30-second demo:** _add your Google Sheets short link here_
+> ▶ **Watch the 30-second demo:** [demo](https://youtube.com/shorts/47iCJ-5_WXg?feature=share)
 
 ## Connect once, then just ask
 

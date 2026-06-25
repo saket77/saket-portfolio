@@ -8,7 +8,7 @@ const SUGGESTIONS = [
   "What is WebGPT?",
   "Has Saket shipped agents to production?",
   "Why is he a fit for a Forward Deployed Engineer role?",
-  "Summarize his experience in three lines."
+  "Show me the latest blog post"
 ];
 
 const GREETING = {

@@ -27,13 +27,13 @@ TypeScript, React, Chrome MV3, Node.js, Express, OpenAI APIs, OpenAPI, Google Sh
 - Designed a connector model — MCP-server-style — where site adapters and API-backed "surfaces" are different flavors of connectors the agent plugs into, alongside bring-your-own planner backends via an OpenAPI-style contract.
 - Built the Chrome runtime (sidepanel UX, state extraction, action execution, navigation recovery, replay) and the Express planner backend (command/result loops, run snapshots, artifacts, tests).
 
-### POC Biotech — AI Inventory & Ordering Assistant (Client Deployment)
-Node.js, Express, OpenAI tool-calling, SQLite, Railway
+### POC Biotech — Pre-Sales Ordering Tool + Admin AI Inventory Assistant (Client Deployment)
+Node.js, Express, OpenAI tool-calling, SQLite, Railway · [Site](https://pocbiotech-website-production.up.railway.app/)
 
-- Built and deployed a production AI assistant for a Mumbai pharmaceutical distributor that answers natural-language questions over their ERP data — stock on hand, expiry, reorder suggestions, and slow movers.
-- Reduced purchasing ~3% by forecasting reorders against sitting inventory and flagging slow-moving and soon-to-expire stock.
-- Implemented an OpenAI tool-calling agent with read-only analytics tools and guarded SQL over normalized purchase/sale transactions; routed quote requests by email.
-- Forward-deployed end to end: scoped the workflow with the owner, parsed their Excel exports, and shipped a single Railway service.
+- Built and deployed a pre-sales ordering website where a Mumbai pharmaceutical distributor's customers browse the catalog and submit product requests.
+- Routed incoming quote requests to the owners by email, replacing manual back-and-forth with a structured pipeline.
+- Added an admin-gated AI inventory assistant (OpenAI tool-calling) that helps the owners decide what to reorder — answering natural-language questions over their ERP data (stock, expiry, reorders, slow movers), grounded in read-only analytics tools and guarded SQL.
+- Reduced purchasing ~3% by forecasting reorders against sitting inventory; scoped end to end with the owner and shipped as a single Railway service.
 
 ### Student Landing — Real Estate Operations Automation (Forward-Deployed)
 WebGPT, Dotloop, Atlas Philly, Philadelphia government websites · [Demo](https://youtube.com/shorts/Y_MClhc6Khg) · [Code](https://github.com/saket77/webgpt-frontend)
