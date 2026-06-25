@@ -27,6 +27,13 @@ TypeScript, React, Chrome MV3, Node.js, Express, OpenAI APIs, OpenAPI, Google Sh
 - Designed a connector model — MCP-server-style — where site adapters and API-backed "surfaces" are different flavors of connectors the agent plugs into, alongside bring-your-own planner backends via an OpenAPI-style contract.
 - Built the Chrome runtime (sidepanel UX, state extraction, action execution, navigation recovery, replay) and the Express planner backend (command/result loops, run snapshots, artifacts, tests).
 
+### WebGPT for CAs — GST Reconciliation Workflow (Sachdev Associates)
+WebGPT, Google Sheets, connector-style tool actions, accounting-domain rules · [Demo](https://youtube.com/shorts/Y_MClhc6Khg) · [Code](https://github.com/saket77/webgpt-frontend)
+
+- Built a CA-focused GST automation extension for WebGPT with Sachdev Associates, a Mumbai chartered-accountancy firm, performing invoice-level reconciliation between the GST portal register (GSTR-2B) and client purchase registers — separating matched, missing, portal-only, and close-match entries into CA-reviewable tabs.
+- Designed domain-aware agent workflows that detect GST filing intent, read structured spreadsheet data, apply deterministic reconciliation logic, and write CA-reviewable tabs (matched invoices, close matches, missing ITC, mismatches, and filing-impact summaries).
+- Implemented the GST engine as a modular vertical workflow layer on WebGPT — combining browser/sheet automation, connector-style tool actions, and accounting-domain rules — positioning WebGPT as an AI back-office platform for chartered accountants.
+
 ### POC Biotech — Pre-Sales Ordering Tool + Admin AI Inventory Assistant (Client Deployment)
 Node.js, Express, OpenAI tool-calling, SQLite, Railway · [Site](https://pocbiotech-website-production.up.railway.app/)
 
@@ -35,14 +42,14 @@ Node.js, Express, OpenAI tool-calling, SQLite, Railway · [Site](https://pocbiot
 - Added an admin-gated AI inventory assistant (OpenAI tool-calling) that helps the owners decide what to reorder — answering natural-language questions over their ERP data (stock, expiry, reorders, slow movers), grounded in read-only analytics tools and guarded SQL.
 - Reduced purchasing ~3% by forecasting reorders against sitting inventory; scoped end to end with the owner and shipped as a single Railway service.
 
-### Student Landing — Real Estate Operations Automation (Forward-Deployed)
+### Student Landing — Real Estate Operations Automation
 WebGPT, Dotloop, Atlas Philly, Philadelphia government websites · [Demo](https://youtube.com/shorts/Y_MClhc6Khg) · [Code](https://github.com/saket77/webgpt-frontend)
 
 - Embedded with a Philadelphia real-estate firm's operations team and deployed WebGPT routines that automate Dotloop agreement prep and property verification against city and third-party sites.
 - Built WebGPT's Dotloop connector, driving Dotloop via API calls rather than brittle DOM steps — with field mapping and human-review patterns — now being promoted to a first-class "surface" (like Google Sheets) for speed.
 
 ### CropGPT — Intent-to-Edit Media Automation Engine
-Python, FFmpeg, OpenAI APIs, image-generation models, JSON Schema · [Demo](https://youtube.com/shorts/Y_MClhc6Khg) · [Code](https://github.com/saket77/webgpt-frontend)
+Python, FFmpeg, OpenAI APIs, image-generation models, JSON Schema · [Demo](https://youtube.com/shorts/Y_MClhc6Khg) · [Code](https://github.com/saket77/cropGPT)
 
 - Translates creative intent into reusable edit actions (crop, caption, CTA placement, audio normalization, export, QA); produced WebGPT's demo videos.
 - Extended into generative interior-design workflows using OpenAI APIs and image-generation models: rough room plans and style intent become furnished-room image specs for review and iteration.

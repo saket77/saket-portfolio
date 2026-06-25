@@ -34,6 +34,21 @@
       ]
     },
     {
+      "slug": "webgpt-gst",
+      "category": "AI & Agents",
+      "title": "WebGPT for CAs — GST Reconciliation Workflow (Sachdev Associates)",
+      "stack": "WebGPT, Google Sheets, connector-style tool actions, accounting-domain rules",
+      "tags": ["forward-deployed", "vertical AI", "GST", "accounting", "reconciliation", "connectors"],
+      "summary": "A CA-focused GST automation vertical built on WebGPT for Sachdev Associates, a Mumbai chartered-accountancy firm — turning repetitive GST reconciliation into structured, reviewable agent workflows.",
+      "links": { "demo": "https://youtu.be/J1yGDs0M-gA", "repo": "https://github.com/saket77/webgpt-frontend" },
+      "bullets": [
+        "Built a CA-focused GST automation extension for WebGPT with Sachdev Associates, a Mumbai chartered-accountancy firm, performing invoice-level reconciliation between the GST portal register (GSTR-2B) and client purchase registers — separating matched, missing, portal-only, and close-match entries into CA-reviewable tabs, with a workflow designed to extend to credit/debit notes, ITC, ISD credits, and imports.",
+        "Designed domain-aware agent workflows that detect GST filing intent, read structured spreadsheet data, apply deterministic reconciliation logic, and write CA-reviewable output tabs with matched invoices, close matches, missing ITC, mismatches, and filing-impact summaries.",
+        "Implemented WebGPT's GST engine as a modular vertical workflow layer — combining browser/sheet automation, connector-style tool actions, workflow hints, and accounting-domain rules — so the agent executes specialized CA workflows while preserving the general WebGPT platform.",
+        "Positioned WebGPT as an AI back-office platform for chartered accountants: turning repetitive GST compliance into structured agent workflows that cut manual spreadsheet review, surface filing risks, and speed client GST return prep."
+      ]
+    },
+    {
       "slug": "designgpt",
       "category": "AI & Agents",
       "title": "DesignGPT — Embeddable Enterprise AI-Agent Framework (Lutron)",
@@ -65,10 +80,11 @@
     {
       "slug": "student-landing",
       "category": "AI & Agents",
-      "title": "Student Landing — Real Estate Operations Automation (Forward-Deployed)",
+      "title": "Student Landing — Real Estate Operations Automation",
       "stack": "WebGPT, Dotloop connector, Atlas Philly, Philadelphia government websites",
       "tags": ["forward-deployed", "customer deployment", "connectors", "operations", "real-world"],
       "summary": "Real forward-deployed work: embedded with a Philadelphia real-estate firm's operations team and deployed WebGPT routines for document prep and property verification.",
+      "links": { "demo": "https://youtu.be/J1yGDs0M-gA", "repo": "https://github.com/saket77/webgpt-frontend" },
       "bullets": [
         "Embedded with Student Landing's operations team and deployed WebGPT routines that automate Dotloop agreement prep and property verification against city and third-party sites.",
         "Built WebGPT's Dotloop connector, which drives Dotloop through API calls rather than brittle DOM steps — now being promoted to a first-class 'surface' (like Google Sheets) for speed.",
@@ -82,6 +98,7 @@
       "stack": "Python, FFmpeg, OpenAI APIs, image-generation models, JSON Schema",
       "tags": ["generative media", "creative AI", "pipelines", "Python", "FFmpeg"],
       "summary": "A creative workflow engine that translates intent into reusable edit actions — and into generative interior-design specs.",
+      "links": { "demo": "https://youtu.be/J1yGDs0M-gA", "repo": "https://github.com/saket77/cropGPT" },
       "bullets": [
         "Translates creative intent into reusable edit actions: cropping, captioning, CTA placement, audio normalization, export, and QA.",
         "Produced WebGPT's YouTube Shorts demos from raw recordings — vertical cuts with branded captions, transcripts, and review notes.",
