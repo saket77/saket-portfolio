@@ -12,7 +12,7 @@ A spreadsheet formula stays in the sheet. A browser script stays in the browser.
 
 WebGPT works across both.
 
-> ▶ **Watch the 30-second demo:** _add your short 4 link here_
+> ▶ **Watch the 30-second demo:** [demo](https://youtube.com/shorts/BqbpHYnJRqc?si=c-xtWBZqxQEYPAej)
 
 ## The task
 
