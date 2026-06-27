@@ -23,7 +23,7 @@
       "tags": ["browser agents", "MCP-style connectors", "Chrome MV3", "OpenAI", "spreadsheets", "OpenAPI", "workflow replay", "full-stack"],
       "summary": "An open-source Chrome runtime for AI browser agents that turns plain-English goals into executed work across the browser, Google Sheets, and Excel — built around a clean runtime/planner boundary and a connector model. Released to beta users and under active development.",
       "links": { "demo": "https://youtu.be/J1yGDs0M-gA", "repo": "https://github.com/saket77/webgpt-frontend", "backend": "https://github.com/saket77/webgpt-backend" },
-      "blogSlugs": ["building-webgpt", "webgpt-reusable-templates", "webgpt-excel", "webgpt-google-sheets"],
+      "blogSlugs": ["building-webgpt", "webgpt-cross-surface", "webgpt-reusable-templates", "webgpt-excel", "webgpt-google-sheets"],
       "bullets": [
         "Published a Chrome MV3 extension with a deployed hosted planner backend that turns natural-language goals into executed workflows across the browser, Google Sheets, and Excel.",
         "Designed a connector model — MCP-server-style — where site adapters and API-backed 'surfaces' (Google Sheets, Microsoft Excel) are different flavors of connectors the agent plugs into.",
