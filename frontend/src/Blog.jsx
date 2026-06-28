@@ -49,7 +49,10 @@ export function BlogPost() {
 
   return (
     <article className="section blog-post">
-      <Link to="/blog" className="blog-back"><ArrowLeft size={15} /> All writing</Link>
+      <div className="blog-back-row">
+        <Link to="/blog" className="blog-back"><ArrowLeft size={15} /> All writing</Link>
+        <Link to="/" className="blog-back">Home</Link>
+      </div>
       <h1 className="blog-post-title">{post.title}</h1>
       {post.date && <p className="blog-post-date">{post.date}</p>}
       {post.tags.length > 0 && (

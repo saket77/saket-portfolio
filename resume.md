@@ -4,7 +4,7 @@ Philadelphia, PA | (917) 690-4451 | saketmundhada7@gmail.com | [LinkedIn](https:
 
 ## Summary
 
-Full-stack AI automation engineer who scopes messy business workflows, builds LLM-powered prototypes, and turns working patterns into reusable agent runtimes. Built WebGPT, an open-source browser/spreadsheet agent system; deployed WebGPT-powered workflows for a real estate operations team; and prototyped DesignGPT, an embeddable enterprise AI-agent framework for Lutron web applications. Targeting Forward Deployed / Applied AI engineering roles.
+Full-stack AI automation engineer who scopes messy business workflows, builds LLM-powered prototypes, and turns working patterns into reusable agent runtimes. Built WebGPT, an open-source browser/spreadsheet agent system; deployed WebGPT-powered workflows for a real estate operations team; and prototyped DesignGPT, an embeddable enterprise AI-agent framework for Lutron web applications. Focused on Forward Deployed and Applied AI engineering — embedding with customers and shipping agents into production.
 
 ## Skills
 
@@ -21,14 +21,14 @@ Full-stack AI automation engineer who scopes messy business workflows, builds LL
 ## Projects
 
 ### WebGPT — Open-Source AI Workflow Agent Platform
-TypeScript, React, Chrome MV3, Node.js, Express, OpenAI APIs, OpenAPI, Google Sheets API · [Demo](https://youtube.com/shorts/Y_MClhc6Khg) · [Code](https://github.com/saket77/webgpt-frontend)
+TypeScript, React, Chrome MV3, Node.js, Express, OpenAI APIs, OpenAPI, Google Sheets API · [Demo](https://youtu.be/J1yGDs0M-gA) · [Code](https://github.com/saket77/webgpt-frontend)
 
 - Published a Chrome extension with a deployed hosted planner backend that turns natural-language goals into executed workflows across the browser, Google Sheets, and Excel.
 - Designed a connector model — MCP-server-style — where site adapters and API-backed "surfaces" are different flavors of connectors the agent plugs into, alongside bring-your-own planner backends via an OpenAPI-style contract.
 - Built the Chrome runtime (sidepanel UX, state extraction, action execution, navigation recovery, replay) and the Express planner backend (command/result loops, run snapshots, artifacts, tests).
 
 ### WebGPT for CAs — GST Reconciliation Workflow (Sachdev Associates)
-WebGPT, Google Sheets, connector-style tool actions, accounting-domain rules · [Demo](https://youtube.com/shorts/Y_MClhc6Khg) · [Code](https://github.com/saket77/webgpt-frontend)
+WebGPT, Google Sheets, connector-style tool actions, accounting-domain rules · [Code](https://github.com/saket77/webgpt-frontend)
 
 - Built a CA-focused GST automation extension for WebGPT with Sachdev Associates, a Mumbai chartered-accountancy firm, performing invoice-level reconciliation between the GST portal register (GSTR-2B) and client purchase registers — separating matched, missing, portal-only, and close-match entries into CA-reviewable tabs.
 - Designed domain-aware agent workflows that detect GST filing intent, read structured spreadsheet data, apply deterministic reconciliation logic, and write CA-reviewable tabs (matched invoices, close matches, missing ITC, mismatches, and filing-impact summaries).
@@ -43,20 +43,20 @@ Node.js, Express, OpenAI tool-calling, SQLite, Railway · [Site](https://pocbiot
 - Reduced purchasing ~3% by forecasting reorders against sitting inventory; scoped end to end with the owner and shipped as a single Railway service.
 
 ### Student Landing — Real Estate Operations Automation
-WebGPT, Dotloop, Atlas Philly, Philadelphia government websites · [Demo](https://youtube.com/shorts/Y_MClhc6Khg) · [Code](https://github.com/saket77/webgpt-frontend)
+WebGPT, Dotloop, Atlas Philly, Philadelphia government websites · [Code](https://github.com/saket77/webgpt-frontend)
 
 - Embedded with a Philadelphia real-estate firm's operations team and deployed WebGPT routines that automate Dotloop agreement prep and property verification against city and third-party sites.
 - Built WebGPT's Dotloop connector, driving Dotloop via API calls rather than brittle DOM steps — with field mapping and human-review patterns — now being promoted to a first-class "surface" (like Google Sheets) for speed.
 
 ### CropGPT — Intent-to-Edit Media Automation Engine
-Python, FFmpeg, OpenAI APIs, image-generation models, JSON Schema · [Demo](https://youtube.com/shorts/Y_MClhc6Khg) · [Code](https://github.com/saket77/cropGPT)
+Python, FFmpeg, OpenAI APIs, image-generation models, JSON Schema · [Code](https://github.com/saket77/cropGPT)
 
 - Translates creative intent into reusable edit actions (crop, caption, CTA placement, audio normalization, export, QA); produced WebGPT's demo videos.
 - Extended into generative interior-design workflows using OpenAI APIs and image-generation models: rough room plans and style intent become furnished-room image specs for review and iteration.
 
 ## Experience
 
-### Lutron Electronics — Project Application Software Engineer → Senior (promoted Dec 2023)
+### Lutron Electronics — Project Application Software Engineer, promoted to Senior (Dec 2023)
 Philadelphia, PA | Jan 2022 – Present
 
 - Built an internal AI design-assistant chatbot on AWS Bedrock, indexing Lutron's UX-principles docs (RAG) to give designers and product managers context-aware guidance and rapid validation of new UI proposals.
