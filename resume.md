@@ -4,7 +4,7 @@ Philadelphia, PA | (917) 690-4451 | saketmundhada7@gmail.com | [LinkedIn](https:
 
 ## Summary
 
-Full-stack AI automation engineer who scopes messy business workflows, builds LLM-powered prototypes, and turns working patterns into reusable agent runtimes. Built WebGPT, an open-source browser/spreadsheet agent system, and shipped it as client deployments — GST reconciliation for Sachdev Associates (WebGPT for CAs) and real-estate operations automation for Student Landing; and prototyped DesignGPT, an embeddable enterprise AI-agent framework for Lutron web applications. Focused on Forward Deployed and Applied AI engineering — embedding with customers and shipping agents into production.
+Forward-deployed, full-stack engineer who turns natural-language goals into agents that ship to real users. I built WebGPT, an open-source browser/spreadsheet agent platform, and deployed it for clients — GST reconciliation for Sachdev Associates and real-estate operations for Student Landing — on top of 4+ years shipping AI and full-stack systems at Lutron.
 
 ## Skills
 
@@ -58,7 +58,7 @@ Python, FFmpeg, OpenAI APIs, image-generation models, JSON Schema · [Code](http
 Philadelphia, PA | Jan 2022 – Present
 
 - Built an internal AI design-assistant chatbot on AWS Bedrock, indexing Lutron's UX-principles docs (RAG) to give designers and product managers context-aware guidance and rapid validation of new UI proposals.
-- Built DesignGPT, a prototype embeddable AI-agent framework — WebGPT's engine packaged as a Node module — so Lutron web applications could expose their own domain skills while the framework handled chat, planning, and execution.
+- Packaged WebGPT's agent engine as a Node module and embedded it into Connect Design, a Lutron-owned React web app, shipping an in-product AI agent that handles chat, planning, and execution while the app exposes its own domain skills.
 - Designed distributed backend services in Go exposing standardized APIs for rule evaluation and asset generation, including a fault-tolerant image-generation pipeline (Go Lambdas, SQS, API Gateway, S3) with a decoupled producer/consumer design.
 - Architected Bill-of-Materials services (hierarchical grouping, batch operations, rollback, deterministic state sync) and a MuleSoft–Go integration mapping product models to Salesforce RLM for an ERP migration.
 - Built a React + TypeScript micro-frontend (container-presenter, Zustand) with real-time 3D product visualization (Threekit), cutting design rework ~40%; added Cypress visual-regression gates to CI/CD.
