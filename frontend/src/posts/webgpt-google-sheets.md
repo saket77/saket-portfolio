@@ -1,12 +1,12 @@
 ---
-title: WebGPT now works in all spreadsheets — Google Sheets + Excel
+title: WebGPT works across Excel and Google Sheets
 date: 2026-06-24
 slug: webgpt-google-sheets
-summary: With Google Sheets added next to Excel, WebGPT proves the connector model — one planner loop, many surfaces — and points to a future where you add a connector for any app yourself.
+summary: With Google Sheets added next to Excel, WebGPT proves the connector model: one planner loop, multiple spreadsheet surfaces.
 tags: webgpt, google-sheets, spreadsheets, connectors
 ---
 
-WebGPT now works in **all spreadsheets** — Microsoft Excel *and* Google Sheets.
+WebGPT now works across **Microsoft Excel and Google Sheets**.
 
 > ▶ **Watch the 30-second demo:** [demo](https://youtube.com/shorts/47iCJ-5_WXg?feature=share)
 

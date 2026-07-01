@@ -30,4 +30,4 @@ Browser agents for real work — not just clicking around.
 
 ---
 
-**Links:** [WebGPT on GitHub](https://github.com/saket77/webgpt-frontend). Next: the same agent in Google Sheets, and why "all spreadsheets" was the point.
+**Links:** [WebGPT on GitHub](https://github.com/saket77/webgpt-frontend). Next: the same agent in Google Sheets, and why one planner loop across spreadsheet surfaces matters.

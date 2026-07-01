@@ -4,7 +4,7 @@ Philadelphia, PA | (917) 690-4451 | saketmundhada7@gmail.com | [LinkedIn](https:
 
 ## Summary
 
-Forward-deployed, full-stack engineer who turns natural-language goals into agents that ship to real users. I built WebGPT, an open-source browser/spreadsheet agent platform, and deployed it for clients — GST reconciliation for Sachdev Associates and real-estate operations for Student Landing — on top of 4+ years shipping AI and full-stack systems at Lutron.
+Forward-deployed, full-stack engineer who turns natural-language goals into agents that ship to real users. I built WebGPT, an open-source browser, spreadsheet, and document-workflow agent platform, and deployed it for clients — GST reconciliation for Sachdev Associates and real-estate operations for Student Landing — on top of 4+ years shipping AI and full-stack systems at Lutron.
 
 ## Skills
 
@@ -23,8 +23,8 @@ Forward-deployed, full-stack engineer who turns natural-language goals into agen
 ### WebGPT — Open-Source AI Workflow Agent Platform
 TypeScript, React, Chrome MV3, Node.js, Express, OpenAI APIs, OpenAPI, Google Sheets API · [Demo](https://youtu.be/J1yGDs0M-gA) · [Code](https://github.com/saket77/webgpt-frontend)
 
-- Published a Chrome extension with a deployed hosted planner backend that turns natural-language goals into executed workflows across the browser, Google Sheets, and Excel.
-- Designed a connector model — MCP-server-style — where site adapters and API-backed "surfaces" are different flavors of connectors the agent plugs into, alongside bring-your-own planner backends via an OpenAPI-style contract.
+- Published a Chrome extension with a deployed hosted planner backend that turns natural-language goals into executed workflows across websites, Google Sheets, Excel, and PDF-like document views.
+- Designed a connector model — MCP-server-style — where site adapters, document-aware adapters, and API-backed "surfaces" are different flavors of connectors the agent plugs into, alongside bring-your-own planner backends via an OpenAPI-style contract.
 - Built the Chrome runtime (sidepanel UX, state extraction, action execution, navigation recovery, replay) and the Express planner backend (command/result loops, run snapshots, artifacts, tests).
 
 ### Sachdev Associates — GST Reconciliation (WebGPT for CAs)
@@ -41,10 +41,10 @@ Node.js, Express, OpenAI tool-calling, SQLite, Railway · [Site](https://pocbiot
 - Reduced purchasing ~3% by forecasting reorders against sitting inventory; scoped end to end with the owner and shipped as a single Railway service.
 
 ### Student Landing — Real-Estate Ops Automation (WebGPT deployment)
-WebGPT, Dotloop (DOM connector), OpenAI vision (PDF prefill), Atlas Philly, Philadelphia government websites · [Code](https://github.com/saket77/webgpt-frontend)
+WebGPT, Dotloop (DOM connector), OpenAI document vision, Atlas Philly, Philadelphia government websites · [Code](https://github.com/saket77/webgpt-frontend)
 
 - Embedded with Student Landing's operations team and deployed WebGPT routines that automate Dotloop lease-agreement prep and property verification against city and third-party sites.
-- Built WebGPT's Dotloop connector as a DOM-driven integration, then added document understanding: WebGPT grabs the source agreement's presigned S3 link (from the page or a Dotloop REST call), runs an OpenAI vision model over the PDF, and pre-fills template fields like lease terms for human review.
+- Built WebGPT's Dotloop connector as a DOM-driven integration, then added document understanding: WebGPT reads rendered Dotloop PDF pages with vision, maps labels to real editable overlay fields, and pre-fills lease template values for human review.
 
 ### CropGPT — Intent-to-Edit Media Automation Engine
 Python, FFmpeg, OpenAI APIs, image-generation models, JSON Schema · [Code](https://github.com/saket77/cropGPT)

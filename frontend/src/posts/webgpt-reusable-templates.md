@@ -16,7 +16,7 @@ WebGPT doesn't work that way.
 
 WebGPT reads the page and acts directly in Chrome. When a run succeeds, you can **save that successful path as a routine** — a template of the steps that actually worked. Next time, you don't re-plan from scratch. You give the template a new input — say, a different address — and run it. Same workflow, new data.
 
-In the demo, the agent completes a task once, the run is saved, and then a new address is dropped in and the **template** runs to completion — producing the finished result without rediscovering every click.
+In the demo, that workflow is a Philadelphia property lookup. WebGPT searches the property site, extracts the needed details, saves the successful path, and then runs the same routine for a new property input — producing a completed summary without rediscovering every click.
 
 ## Why this matters
 
@@ -36,7 +36,7 @@ Because the connectors and the planner are cleanly separated, a template isn't b
 
 ## Where it pays off
 
-This is exactly what made the forward-deployed work viable. When I deployed WebGPT with a real estate operations team, the win wasn't "an AI clicked some buttons once." It was that an operator could run the *same* routine across new files, every day, without babysitting a fresh plan each time.
+This is exactly what made the forward-deployed work viable. When I deployed WebGPT with a real estate operations team, the win wasn't "an AI clicked some buttons once." It was that an operator could run the *same* workflow across new addresses, files, or forms every day without babysitting a fresh plan each time.
 
 Repeatable browser agents, built in public.
 

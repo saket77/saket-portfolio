@@ -2,11 +2,11 @@
 title: Building WebGPT — an open-source runtime for AI browser agents
 date: 2026-06-20
 slug: building-webgpt
-summary: What WebGPT is, how it's built, and the connector model that lets one agent work across real websites, Google Sheets, and Excel.
+summary: What WebGPT is, how it's built, and the connector model that lets one agent work across real websites, spreadsheets, and PDF-heavy workflows.
 tags: webgpt, agents, browser, connectors
 ---
 
-Most "AI workflow" tools break the moment they touch a messy, real-world web app. WebGPT is my attempt to fix that: an open-source Chrome runtime for AI browser agents that turns a plain-English goal into actually-executed work — across the browser, Google Sheets, and Excel.
+Most "AI workflow" tools break the moment they touch a messy, real-world web app. WebGPT is my attempt to fix that: an open-source Chrome runtime for AI browser agents that turns a plain-English goal into actually-executed work across websites, spreadsheets, and PDF-heavy workflows.
 
 > ▶ **Watch the demo:** [WebGPT in action](https://youtu.be/J1yGDs0M-gA)
 
@@ -31,12 +31,13 @@ Here's the idea I'm most excited about. Instead of hard-coding support for each 
 
 - **Site adapters** add domain-specific reliability for specific websites where generic DOM extraction isn't enough. They enrich state and provide stable mappings; they don't execute actions or call the planner directly.
 - **Runtime surfaces** route non-DOM products like **Google Sheets** and **Microsoft Excel** through dedicated API clients, while keeping the *same* planner loop.
+- **Document-aware connectors** let high-friction apps like Dotloop expose real editable document overlays while the backend vision path reads rendered PDF pages when the DOM does not contain enough text.
 
 If you've used Claude's connectors or thought about MCP, the mental model will feel familiar: you teach the agent a new app by adding a connector, not by rewriting the agent. Adding Excel didn't change the planning loop — it added a connector. (More on the Excel and Sheets connectors in the next two posts.)
 
 ## Structured state over screenshots
 
-WebGPT extracts structured browser state — URLs, frames, visible text, controls, labels, scroll containers, and adapter-provided hints — instead of throwing raw screenshots at the model. That gives the planner a far cleaner interface than pixel-only reasoning, and it's a big part of why the agent stays reliable on real pages.
+WebGPT extracts structured browser state — URLs, frames, visible text, controls, labels, scroll containers, adapter-provided hints, and runtime-specific state — instead of throwing raw screenshots at the model. When a document view is effectively visual, the connector can hand the backend rendered page images for vision extraction, then return compact text and field data to the planner. That gives the planner a far cleaner interface than pixel-only reasoning while still covering pages where the DOM is not enough.
 
 ## Human-in-the-loop and recovery
 

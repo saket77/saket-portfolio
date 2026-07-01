@@ -13,7 +13,7 @@
     "webgpt": "https://github.com/saket77/webgpt-frontend",
     "youtube": "https://youtu.be/J1yGDs0M-gA"
   },
-  "summary": "Forward-deployed, full-stack engineer who turns natural-language goals into agents that ship to real users. I built WebGPT, an open-source browser/spreadsheet agent platform, and deployed it for clients — GST reconciliation for Sachdev Associates and real-estate operations for Student Landing — on top of 4+ years shipping AI and full-stack systems at Lutron.",
+  "summary": "Forward-deployed, full-stack engineer who turns natural-language goals into agents that ship to real users. I built WebGPT, an open-source browser, spreadsheet, and document-workflow agent platform, and deployed it for clients — GST reconciliation for Sachdev Associates and real-estate operations for Student Landing — on top of 4+ years shipping AI and full-stack systems at Lutron.",
   "lookingFor": "Forward Deployed Engineer / Applied AI roles — embedding with customers and shipping agents into production.",
   "projects": [
     {
@@ -21,16 +21,16 @@
       "category": "AI & Agents",
       "title": "WebGPT — Open-Source AI Workflow Agent Platform",
       "stack": "TypeScript, React, Chrome MV3, Node.js, Express, OpenAI APIs, OpenAPI, Google Sheets API, Microsoft Graph",
-      "tags": ["browser agents", "MCP-style connectors", "Chrome MV3", "OpenAI", "spreadsheets", "OpenAPI", "workflow replay", "full-stack"],
-      "summary": "An open-source Chrome runtime for AI browser agents that turns plain-English goals into executed work across the browser, Google Sheets, and Excel — built around a clean runtime/planner boundary and a connector model. Released to beta users and under active development.",
+      "tags": ["browser agents", "MCP-style connectors", "Chrome MV3", "OpenAI", "spreadsheets", "PDFs", "OpenAPI", "workflow replay", "full-stack"],
+      "summary": "An open-source Chrome runtime for AI browser agents that turns plain-English goals into executed work across websites, Google Sheets, Excel, and PDF-heavy workflows — built around a clean runtime/planner boundary and a connector model. Released to beta users and under active development.",
       "links": { "demo": "https://youtu.be/J1yGDs0M-gA", "repo": "https://github.com/saket77/webgpt-frontend", "backend": "https://github.com/saket77/webgpt-backend" },
-      "blogSlugs": ["building-webgpt", "webgpt-cross-surface", "webgpt-reusable-templates", "webgpt-excel", "webgpt-google-sheets"],
+      "blogSlugs": ["building-webgpt", "webgpt-dotloop-pdfs", "webgpt-cross-surface", "webgpt-reusable-templates", "webgpt-excel", "webgpt-google-sheets"],
       "bullets": [
-        "Published a Chrome MV3 extension with a deployed hosted planner backend that turns natural-language goals into executed workflows across the browser, Google Sheets, and Excel.",
-        "Designed a connector model — MCP-server-style — where site adapters and API-backed 'surfaces' (Google Sheets, Microsoft Excel) are different flavors of connectors the agent plugs into.",
+        "Published a Chrome MV3 extension with a deployed hosted planner backend that turns natural-language goals into executed workflows across websites, Google Sheets, Excel, and PDF-like document views.",
+        "Designed a connector model — MCP-server-style — where site adapters, document-aware adapters, and API-backed 'surfaces' (Google Sheets, Microsoft Excel) are different flavors of connectors the agent plugs into.",
         "Kept a crisp runtime/planner boundary: the extension owns browser execution and state extraction; any backend that speaks the documented OpenAPI contract can own planning.",
         "Built the Chrome runtime — sidepanel UX, structured multi-frame state extraction, action execution, navigation recovery, human-in-the-loop confirmation, and replay.",
-        "Turned successful runs into reusable routines (templates) that re-run across new inputs instead of starting from zero every time.",
+        "Turned successful runs into reusable routines that re-run across new inputs instead of starting from zero every time.",
         "Released to beta users and under active development — roadmap includes a user-facing skill to create a connector for any site (DOM or API), with OAuth and PKCE handled for you."
       ]
     },
@@ -79,14 +79,14 @@
       "slug": "student-landing",
       "category": "AI & Agents",
       "title": "Student Landing — Real-Estate Ops Automation (WebGPT deployment)",
-      "stack": "WebGPT, Dotloop DOM connector, OpenAI vision (PDF prefill), Atlas Philly, Philadelphia government websites",
+      "stack": "WebGPT, Dotloop DOM connector, OpenAI document vision, Atlas Philly, Philadelphia government websites",
       "tags": ["forward-deployed", "client deployment", "document understanding", "connectors", "real-world"],
       "summary": "Real forward-deployed work: embedded with a Philadelphia real-estate firm's operations team and deployed WebGPT routines for lease-agreement prep and property verification.",
       "links": { "repo": "https://github.com/saket77/webgpt-frontend" },
       "bullets": [
         "Embedded with Student Landing's operations team and deployed WebGPT routines that automate Dotloop lease-agreement prep and property verification against city and third-party sites.",
         "Built WebGPT's Dotloop connector as a DOM-driven integration — field mapping, source-value extraction, replay, and human-review patterns hardened through real operator use under deadline pressure.",
-        "Added document understanding to the flow: WebGPT captures the source agreement's presigned S3 link (from the page or a Dotloop REST call) and runs an OpenAI vision model over the PDF to pre-fill template fields like lease terms for human review."
+        "Added document understanding to the flow: WebGPT reads rendered Dotloop PDF pages with vision, maps labels to real editable overlay fields, and fills lease template values for human review."
       ]
     },
     {
